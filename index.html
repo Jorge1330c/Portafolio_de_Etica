@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-effects="on">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b16">
+<title>Brújula Ética · Sinergia Sistémica · HUM-010</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>
+  try {
+    const p = new URLSearchParams(location.search).get('theme');
+    const t = p || localStorage.getItem('theme');
+    document.documentElement.setAttribute('data-theme', (t==='light'||t==='dark')?t:'dark');
+    const fx = localStorage.getItem('effects');
+    const r = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.documentElement.setAttribute('data-effects', (fx==='on'||fx==='off')?fx:(r?'off':'on'));
+  } catch(_){}
+</script>
+</head>
+<body>
+
+<canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
+<div class="halo-layer" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="lantern" id="lantern" aria-hidden="true"></div>
+<div class="reading-progress" aria-hidden="true"><span id="progress"></span></div>
+
+<div class="app">
+
+  <aside id="sidebar" aria-label="Navegación principal">
+    <div class="sidebar__profile">
+      <a href="#inicio" class="sidebar__avatar-link" aria-label="Inicio">
+        <span class="sidebar__avatar">Científica</span>
+      </a>
+      <a href="#inicio" class="sidebar__title">Brújula <span class="serif-em">Ética</span></a>
+      <p class="sidebar__subtitle">Portafolio digital · HUM-010 · UCSUR · 2026-2</p>
+    </div>
+
+    <ul class="sidebar__nav" id="sidenav">
+      <li><a href="#inicio" class="is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5"/><path d="M5 10v10h14V10"/></svg><span>Inicio</span></a></li>
+      <li><a href="#equipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Equipo</span></a></li>
+      <li><a href="#manifiesto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Manifiesto</span></a></li>
+      <li class="is-disabled"><a aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg><span>Podcast</span><svg class="sidebar__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a></li>
+      <li class="is-disabled"><a aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span>Video-reacción</span><svg class="sidebar__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a></li>
+      <li class="is-disabled"><a aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span>Infografía</span><svg class="sidebar__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a></li>
+      <li><a href="#bitacora"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span>Bitácora</span></a></li>
+      <li><a href="#ruta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>Sobre el curso</span></a></li>
+    </ul>
+
+    <div class="sidebar__bottom">
+      <button class="sidebar__icon-btn" type="button" data-theme-toggle aria-label="Cambiar tema" title="Cambiar tema">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></svg>
+      </button>
+      <button class="sidebar__icon-btn" type="button" data-effects-toggle aria-label="Efectos" aria-pressed="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>
+      </button>
+      <span class="sidebar__bottom-label">Tema · Efectos</span>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+
+  <div id="main-wrapper">
+    <div id="topbar">
+      <div class="topbar__inner">
+        <button class="topbar__trigger" type="button" id="sidebar-trigger" aria-controls="sidebar" aria-label="Abrir menú">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <nav class="breadcrumb" aria-label="Migas de pan">
+          <span class="breadcrumb__current" id="breadcrumb-current">Inicio</span>
+        </nav>
+        <button class="topbar__theme" type="button" data-theme-toggle aria-label="Cambiar tema" title="Cambiar tema">
+          <svg class="topbar__theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></svg>
+          <svg class="topbar__theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="main-area">
+      <main class="main-column" id="main">
+
+        <!-- HERO / INICIO -->
+        <section id="inicio" class="hero" aria-labelledby="hero-title">
+          <div class="hero__inner">
+            <div class="hero__badge">✦ Ética y Deontología Profesional · 2026-2</div>
+            <h1 id="hero-title" class="hero__title">Brújula<em>Ética</em></h1>
+            <p class="hero__subtitle">Portafolio digital de identidad ética profesional</p>
+            <div class="hero__divider" aria-hidden="true"></div>
+            <p class="hero__desc">Aquí reunimos el trabajo del equipo durante el curso: el Manifiesto de Identidad Ética, el podcast sobre un dilema profesional, el video-reacción y la infografía final.</p>
+            <dl class="hero__meta">
+              <div><dt>Curso</dt><dd>Ética y Deontología Profesional</dd></div>
+              <div><dt>Carrera</dt><dd>Ingeniería de Sistemas Empresarial</dd></div>
+              <div><dt>Semestre</dt><dd>2026-2</dd></div>
+              <div><dt>Equipo</dt><dd>Sinergia Sistémica</dd></div>
+            </dl>
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="#ac1" data-magnetic>Leer el Manifiesto
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a class="btn btn--ghost" href="#equipo" data-magnetic>Conócenos</a>
+            </div>
+          </div>
+
+          <div class="hero__visual">
+            <div class="pedestal">
+              <div class="pedestal__glow" aria-hidden="true"></div>
+              <a class="pedestal__frame" href="#ac1" aria-label="Nuestra metáfora artística">
+                <img src="Etica_S1.jpeg" alt="Faro de La Punta iluminando la noche y guiando embarcaciones hacia el puerto" loading="eager">
+                <span class="pedestal__caption">
+                  <span>Nuestra metáfora</span>
+                  <strong>El Faro de La Punta</strong>
+                </span>
+              </a>
+            </div>
+            <div class="opal-pills" aria-label="Estado del portafolio">
+              <a class="opal-pill" href="#bitacora">
+                <span class="opal-pill__value">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span data-count="4">4</span>
+                </span>
+                <span class="opal-pill__label">AC listos</span>
+              </a>
+              <a class="opal-pill" href="#equipo">
+                <span class="opal-pill__value">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                  <span data-count="5">5</span>
+                </span>
+                <span class="opal-pill__label">Integrantes</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- EQUIPO -->
+        <section id="equipo" class="block" style="scroll-margin-top:80px">
+          <div class="sec-head">
+            <p class="eyebrow">Quiénes somos</p>
+            <h2 class="sec-head__title">El equipo <span class="serif-em">Sinergia Sistémica</span></h2>
+            <p class="sec-head__lead">Cinco estudiantes de Ingeniería de Sistemas Empresarial que entienden la organización como un sistema vivo donde cada parte afecta al todo.</p>
+          </div>
+          <ul class="prose" style="list-style:none;padding:0">
+            <li><strong>Jhoseph Aaron Hilario Manrique</strong></li>
+            <li><strong>Mathias Nicolás Enríquez Nuñez</strong></li>
+            <li><strong>Jorge Fabricio Marcacuzco Paquico</strong></li>
+            <li><strong>Aisha Cuba Conchatupa</strong></li>
+            <li><strong>María Jesús Cuya Pajuelo</strong></li>
+          </ul>
+        </section>
+
+        <!-- SECCIONES -->
+        <section id="manifiesto" class="block" style="scroll-margin-top:80px">
+          <div class="sec-head">
+            <p class="eyebrow">Estructura del portafolio</p>
+            <h2 class="sec-head__title">Las cinco <span class="serif-em">secciones</span></h2>
+            <p class="sec-head__lead">Siguen el orden de los cuatro módulos del curso, el mismo en que construimos el portafolio.</p>
+          </div>
+          <div class="section-grid">
+            <a href="#equipo" class="section-card">
+              <div class="section-card__top"><span class="section-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span class="status status--done">Listo</span></div>
+              <p class="section-card__eyebrow">Sinergia Sistémica · 5 integrantes</p>
+              <p class="section-card__title">Quiénes somos</p>
+              <p class="section-card__desc">Somos estudiantes de Ingeniería de Sistemas Empresarial. Descubre quiénes somos y qué nos motiva.</p>
+              <span class="section-card__go">Abrir sección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </a>
+            <a href="#ac1" class="section-card">
+              <div class="section-card__top"><span class="section-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="status status--done">Listo</span></div>
+              <p class="section-card__eyebrow">Módulo I · Semanas 1–5</p>
+              <p class="section-card__title">Manifiesto de Identidad Ética</p>
+              <p class="section-card__desc">El Faro de La Punta como metáfora, el propósito profesional de la Ingeniería de Sistemas Empresarial, las poblaciones que nos comprometemos a proteger y los valores desde los que decidimos.</p>
+              <span class="section-card__go">Abrir sección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </a>
+            <div class="section-card section-card--disabled" aria-disabled="true">
+              <div class="section-card__top"><span class="section-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></span><span class="status status--todo">Próximamente</span></div>
+              <p class="section-card__eyebrow">Módulo II · Semanas 6–7</p>
+              <p class="section-card__title">Podcast de Dilema Moral</p>
+              <p class="section-card__desc">Un caso real del Perú desde dos marcos contrapuestos: el deber kantiano y el utilitarismo de Mill.</p>
+              <span class="section-card__go section-card__go--muted">Disponible más adelante</span>
+            </div>
+            <div class="section-card section-card--disabled" aria-disabled="true">
+              <div class="section-card__top"><span class="section-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span><span class="status status--todo">Próximamente</span></div>
+              <p class="section-card__eyebrow">Módulo III · Semanas 9–12</p>
+              <p class="section-card__title">Video-reacción crítico</p>
+              <p class="section-card__desc">Revisamos nuestro propio podcast: vacíos normativos, tensiones ético-legales y una propuesta para humanizar el código.</p>
+              <span class="section-card__go section-card__go--muted">Disponible más adelante</span>
+            </div>
+            <div class="section-card section-card--disabled" aria-disabled="true">
+              <div class="section-card__top"><span class="section-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg></span><span class="status status--todo">Próximamente</span></div>
+              <p class="section-card__eyebrow">Módulo IV · Semanas 13–15</p>
+              <p class="section-card__title">Infografía de Integridad y Sostenibilidad</p>
+              <p class="section-card__desc">Nuestra pieza visual con dos capas: cuidado de poblaciones vulnerables y responsabilidad con generaciones futuras.</p>
+              <span class="section-card__go section-card__go--muted">Disponible más adelante</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- BITÁCORA -->
+        <section id="bitacora" class="block" style="scroll-margin-top:80px">
+          <div class="sec-head">
+            <p class="eyebrow">Bitácora</p>
+            <h2 class="sec-head__title">Trabajo por <span class="serif-em">sesión</span></h2>
+            <p class="sec-head__lead">Una entrada por aprendizaje colaborativo, con lo que produjimos en clase.</p>
+          </div>
+        </section>
+
+        <!-- AC1 -->
+        <article id="ac1" class="post">
+          <figure class="cover">
+            <img class="cover__img" src="Etica_S1.jpeg" alt="Faro de La Punta iluminando la noche y guiando embarcaciones hacia el puerto">
+            <figcaption class="cover__credit">Imagen: Faro de La Punta, Callao</figcaption>
+          </figure>
+          <header class="post__header">
+            <p class="post__eyebrow">AC1 · Módulo I · Aspectos básicos de la ética</p>
+            <h1 class="post__title">Mi metáfora artística: ¿quiénes somos y hacia dónde vamos?</h1>
+            <div class="post__meta">
+              <span><strong>Sesión:</strong> Semana 1 · Sesión 1</span>
+              <span><strong>Alimenta:</strong> Manifiesto de Identidad Ética</span>
+              <span><strong>Equipo:</strong> Hilario Manrique, Jhoseph Aaron · Enríquez Nuñez, Mathias Nicolás · Marcacuzco Paquico, Jorge Fabricio · Cuba Conchatupa, Aisha · Cuya Pajuelo, María Jesús</span>
+            </div>
+            <div class="post__tags">
+              <a class="tag-pill" href="#">Módulo I</a>
+              <a class="tag-pill" href="#">Manifiesto</a>
+              <a class="tag-pill" href="#">Faro de La Punta</a>
+              <a class="tag-pill" href="#">Telos</a>
+              <a class="tag-pill" href="#">Areté</a>
+              <a class="tag-pill" href="#">Eudaimonía</a>
+            </div>
+          </header>
+          <div class="prose">
+            <h2>La actividad</h2>
+            <p>Con este primer aprendizaje colaborativo abrimos el <strong>Manifiesto de Identidad Ética</strong>, la pieza central de nuestro portafolio. Como equipo escogimos una metáfora artística que tradujera en una imagen el propósito ético de la <strong>Ingeniería de Sistemas Empresarial</strong>, y la argumentamos filosóficamente con los conceptos de <em>telos</em>, <em>areté</em> y <em>eudaimonía</em> del Libro I de la <em>Ética a Nicómaco</em> (Aristóteles, 2014) y con la idea de que la ética no es un catálogo de normas, sino la pregunta por cómo vivir bien con otros (Giusti, 2007).</p>
+            <h2>La metáfora: El Faro de La Punta</h2>
+            <p>Elegimos el <strong>Faro de La Punta (Callao)</strong> como símbolo de nuestro equipo porque representa <strong>orientación, seguridad y dirección</strong>. Es una referencia marítima tradicional del litoral limeño: un punto de luz que guía a las embarcaciones en medio de la oscuridad y las ayuda a llegar a puerto seguro.</p>
+            <p>Lo relacionamos con nuestra carrera porque, como futuros ingenieros, buscamos desarrollar soluciones tecnológicas que ayuden a las personas y a las organizaciones a tomar mejores decisiones en un entorno digital que muchas veces se siente tan incierto como el mar de noche. Nuestra metáfora condensa la cadena completa: <em>de la incertidumbre de los datos… hacia decisiones seguras</em>.</p>
+            <h2>Nuestro propósito</h2>
+            <blockquote>
+              <p>Como futuros profesionales, buscamos utilizar la tecnología de manera ética, responsable y segura. Nuestro objetivo no es solo picar código ni construir sistemas que funcionen: queremos construir <strong>guías claras y seguras</strong> para que las personas naveguen en el entorno digital. Buscamos alcanzar el <em>telos</em> de nuestra profesión —el bien común— desarrollando el <em>areté</em> desde las aulas, habituándonos a programar con transparencia, ética y responsabilidad social. Así, el faro representa cómo nuestra profesión puede orientar la tecnología hacia un impacto positivo en la sociedad.</p>
+            </blockquote>
+            <p><strong>Propósito de nuestra carrera.</strong> Diseñar, optimizar y proteger arquitecturas de información y software que garanticen la toma de decisiones eficiente, justa y segura, promoviendo el desarrollo tecnológico y el bienestar integral de la sociedad peruana.</p>
+            <h2>Los tres conceptos aristotélicos, aplicados</h2>
+            <ul>
+              <li><strong>Telos.</strong> El fin último de la Ingeniería de Sistemas Empresarial no es la tecnología por sí misma, sino el bien común alcanzado mediante el ordenamiento y la protección justa de la información. El faro no existe para iluminarse a sí mismo, sino para que otros lleguen a puerto.</li>
+              <li><strong>Areté.</strong> La excelencia profesional se construye mediante el hábito ético de escribir software transparente, auditable y libre de sesgos perjudiciales. No se trata de un acto aislado de virtud, sino de una disciplina diaria que se entrena como se entrena un rumbo.</li>
+              <li><strong>Eudaimonía.</strong> El florecimiento profesional y la realización plena se alcanzan cuando el ingeniero pone sus conocimientos técnicos al servicio del bien común, logrando que la tecnología genere un impacto positivo y seguro en la vida de los ciudadanos.</li>
+            </ul>
+            <h2>Nuestro mensaje</h2>
+            <blockquote>
+              <p>Así como un faro orienta a quienes navegan, nosotros buscamos orientar la tecnología hacia un futuro más seguro, responsable y beneficioso para todos.</p>
+            </blockquote>
+          </div>
+          <section class="refs-panel">
+            <p class="refs-panel__eyebrow">✦ Bibliografía</p>
+            <h2 class="refs-panel__title">Referencias</h2>
+            <ol class="refs__list">
+              <li>Aristóteles. (2014). <em>Ética a Nicómaco</em> (Libro I). Obra original escrita ca. 349 a. C.</li>
+              <li>Giusti, M. (2007). <em>El sentido de la ética</em>.</li>
+              <li>Universidad Científica del Sur. (2026). <em>Ficha de aprendizaje colaborativo AC1: Mi metáfora artística. ¿Quiénes somos y hacia dónde vamos?</em> [Material del curso Ética y Deontología Profesional, HUM-010].</li>
+            </ol>
+          </section>
+        </article>
+
+        <!-- AC2 -->
+        <article id="ac2" class="post">
+          <figure class="cover">
+            <img class="cover__img" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1600&q=80&auto=format&fit=crop" alt="Representación de poblaciones vulnerables y compromiso ético">
+            <figcaption class="cover__credit">Imagen: Unsplash · (reemplazar por la definitiva)</figcaption>
+          </figure>
+          <header class="post__header">
+            <p class="post__eyebrow">AC2 · Módulo I · Aspectos básicos de la ética</p>
+            <h1 class="post__title">¿A quién le debemos responsabilidad? Poblaciones vulnerables de nuestra carrera</h1>
+            <div class="post__meta">
+              <span><strong>Sesión:</strong> Semana 2 · Sesión 2</span>
+              <span><strong>Alimenta:</strong> Manifiesto de Identidad Ética</span>
+              <span><strong>Equipo:</strong> Hilario · Enríquez · Marcacuzco · Cuba · Cuya</span>
+            </div>
+            <div class="post__tags">
+              <a class="tag-pill" href="#">Módulo I</a>
+              <a class="tag-pill" href="#">Bioética</a>
+              <a class="tag-pill" href="#">Dignidad</a>
+              <a class="tag-pill" href="#">Kant</a>
+              <a class="tag-pill" href="#">Justicia</a>
+              <a class="tag-pill" href="#">Autonomía</a>
+            </div>
+          </header>
+
+          <aside class="music">
+            <header class="music__head">
+              <span class="music__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+              <div class="music__meta">
+                <p class="music__eyebrow">Banda sonora</p>
+                <p class="music__title">Cholo soy y no me compadezcas — Luis Abanto Morales</p>
+                <p class="music__note">La canción reclama dignidad sin compasión ni paternalismo. La misma exigencia que atraviesa esta sesión: la persona como fin en sí misma (Kant), no como usuario que «no llega» a nuestros sistemas.</p>
+              </div>
+            </header>
+            <div class="music__frame">
+              <iframe src="https://open.spotify.com/embed/track/0wT7NzrXJVgmpy8KgDPesF?utm_source=generator&theme=0" title="Cholo soy y no me compadezcas" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </aside>
+
+          <div class="prose">
+            <h2>La actividad</h2>
+            <p>En la sesión anterior establecimos propósito y metáfora. En esta le pusimos rostro a quienes servimos: sin reconocer las poblaciones vulnerables de nuestro campo profesional, cualquier declaración de propósito queda en el vacío.</p>
+            <p>Nos apoyamos en cuatro ideas (Universidad Científica del Sur, 2026b): la persona como fin en sí misma (Kant, 1785/2012); la distinción entre dignidad ontológica y utilitaria; los cuatro principios de la bioética de Beauchamp y Childress; y los derechos humanos como piso mínimo irrenunciable (ONU, 1948).</p>
+            <h2>Tres poblaciones, tres principios en riesgo</h2>
+            <h3>1. Clientes de zonas con poca conectividad · Justicia</h3>
+            <p>Personas que no pueden acceder a promociones, soporte o compras. Es usual migrar ventas y servicios asumiendo que el cliente tiene internet y dispositivos propios; quienes viven en la sierra o la selva quedan sin el soporte que reciben los usuarios urbanos.</p>
+            <blockquote><p>Lo cuestionable es que esa decisión no es un error técnico, es una prioridad: es más barato ignorar al usuario rural que adaptar el sistema para él.</p></blockquote>
+            <h3>2. Personas con discapacidad visual o motora · Autonomía</h3>
+            <p>Intentan usar apps bancarias, páginas de trámites o sistemas de atención al cliente sin diseño adecuado. Al diseñar o evaluar plataformas, los sistemas suelen aprobarse pensando en el usuario común, sin lector de pantalla ni navegación por teclado. En el Perú esto es común en la banca y en trámites como los de RENIEC o SUNAT.</p>
+            <blockquote><p>Pierden control e independencia sobre gestiones que les corresponden: el sistema debería facilitarles el acceso y termina exigiéndoles herramientas que no pueden usar.</p></blockquote>
+            <h3>3. Microempresarios informales · No maleficencia</h3>
+            <p>Deben adoptar plataformas digitales de venta, cobro o facturación electrónica exigidas por ley o por las grandes cadenas. No cuentan con conocimiento técnico, capital ni tiempo, lo que termina en dependencia de terceros que a veces los estafan o simplemente quedan fuera del mercado formal.</p>
+            <blockquote><p>Si un sistema exige algo que la persona no puede cumplir por sí sola, el problema no es del microempresario, es del diseño que no pensó en él.</p></blockquote>
+            <h2>Nuestro compromiso ético</h2>
+            <blockquote><p>Como en la metáfora, un faro no pierde sentido por la niebla, sino porque quienes lo construyen dejan de mirar a quién están dejando fuera del puerto. Lo mismo pasa con un sistema: se construye pensando en el usuario ideal, no en el real, y así se termina excluyendo a quien más lo necesita. Por eso nuestro compromiso no es solo escuchar antes de digitalizar, sino aceptar que como equipo también podemos caer en ese mismo error si no cuestionamos nuestras propias suposiciones.</p></blockquote>
+          </div>
+          <section class="refs-panel">
+            <p class="refs-panel__eyebrow">✦ Bibliografía</p>
+            <h2 class="refs-panel__title">Referencias</h2>
+            <ol class="refs__list">
+              <li>Beauchamp y Childress. (s. f.). Los cuatro principios de la bioética [Referidos en la sesión 2, HUM-010].</li>
+              <li>Kant, I. (2012). <em>Fundamentación de la metafísica de las costumbres</em>. Obra original publicada en 1785.</li>
+              <li>Organización de las Naciones Unidas. (1948). <em>Declaración Universal de los Derechos Humanos</em>.</li>
+              <li>Universidad Científica del Sur. (2026). <em>Ficha de aprendizaje colaborativo AC2</em> [Material del curso HUM-010].</li>
+            </ol>
+          </section>
+        </article>
+
+        <!-- AC3 -->
+        <article id="ac3" class="post">
+          <figure class="cover">
+            <img class="cover__img" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80&auto=format&fit=crop" alt="Representación de jerarquía de valores y axiológica profesional">
+            <figcaption class="cover__credit">Imagen: Unsplash · (reemplazar por la definitiva)</figcaption>
+          </figure>
+          <header class="post__header">
+            <p class="post__eyebrow">AC3 · Módulo I · Aspectos básicos de la ética</p>
+            <h1 class="post__title">¿Qué valoramos? Nuestra jerarquía de valores</h1>
+            <div class="post__meta">
+              <span><strong>Sesión:</strong> Semana 3 · Sesión 3</span>
+              <span><strong>Alimenta:</strong> Manifiesto de Identidad Ética</span>
+              <span><strong>Equipo:</strong> Hilario · Enríquez · Marcacuzco · Cuba · Cuya</span>
+            </div>
+            <div class="post__tags">
+              <a class="tag-pill" href="#">Módulo I</a>
+              <a class="tag-pill" href="#">Scheler</a>
+              <a class="tag-pill" href="#">Axiología</a>
+              <a class="tag-pill" href="#">Valores vitales</a>
+            </div>
+          </header>
+          <div class="prose">
+            <h2>La actividad</h2>
+            <p>Con el propósito (AC1) y la responsabilidad hacia poblaciones vulnerables (AC2) ya definidos, en esta sesión explicitamos desde qué valores decidimos: sin axiología explícita, el Manifiesto es declarativo pero no ético. Clasificamos los valores con la tabla de Max Scheler, que les asigna rangos objetivos: vitales, de lo agradable, espirituales, económicos y de lo sagrado (Scheler, 1913–1916).</p>
+            <h2>Lo que encontramos, en resumen</h2>
+            <ul>
+              <li><strong>Valores económicos: sí, casi siempre.</strong> Es lo primero que nos enseñan a mirar: cuánto cuesta, cuánto se ahorra. Recién después aparece la pregunta de a quién beneficia o perjudica.</li>
+              <li><strong>Valores de lo agradable: sí.</strong> Nos preocupa que las cosas se vean bien y sean fáciles de usar. La pregunta es si eso resuelve el problema o solo hace que se sienta resuelto.</li>
+              <li><strong>Valores vitales: parcial.</strong> Cuando un proyecto se atrasa, lo primero que se sacrifica son las horas de sueño y no la fecha de entrega.</li>
+              <li><strong>Valores espirituales: parcial.</strong> Lo justo sería decir con claridad en un informe que un puesto ya no sería necesario; lo cómodo es hablar de «mejora» sin mencionar a quién afecta.</li>
+              <li><strong>Valores de lo sagrado: parcial.</strong> No decidimos por creencias sino por normas y datos. Aun así, hay límites que no se discuten aunque convengan, como alterar cifras para ganar una licitación del Estado.</li>
+            </ul>
+            <h2>Tensión axiológica principal</h2>
+            <blockquote><p>En nuestra carrera existe una tensión constante entre los valores económicos y los valores espirituales y vitales. Muchas veces las empresas buscan reducir costos, aumentar la rentabilidad y mejorar la eficiencia, pero esto puede generar que se deje de lado la accesibilidad, la privacidad y el bienestar de los usuarios. Un ejemplo peruano ocurre cuando se implementan plataformas digitales pensando solo en usuarios con recursos tecnológicos, excluyendo a personas con poca conectividad o discapacidad. Por ello, consideramos que la eficiencia económica debe ser un medio y no el objetivo final de la ingeniería.</p></blockquote>
+            <h2>Nuestra pirámide</h2>
+            <ol>
+              <li><strong>Valores espirituales</strong> — justicia, verdad, responsabilidad y dignidad humana.</li>
+              <li><strong>Valores vitales</strong> — bienestar, salud y calidad de vida.</li>
+              <li><strong>Valores económicos</strong> — rentabilidad, eficiencia y utilidad.</li>
+              <li><strong>Valores de lo agradable</strong> — comodidad, facilidad de uso y satisfacción inmediata.</li>
+              <li><strong>Valores de lo sagrado</strong> — principios y convicciones morales.</li>
+            </ol>
+            <h2>Declaración de posición axiológica</h2>
+            <blockquote><p>Como equipo priorizamos los valores espirituales y vitales sobre los económicos, porque nuestra profesión no debe enfocarse únicamente en generar beneficios financieros, sino en crear soluciones responsables. Un faro solo cumple su función cuando considera a todas las embarcaciones que navegan, no solo a las más grandes o rápidas. Por ello buscamos desarrollar sistemas eficientes, pero siempre respetando la dignidad, inclusión y bienestar de los usuarios.</p></blockquote>
+          </div>
+          <section class="refs-panel">
+            <p class="refs-panel__eyebrow">✦ Bibliografía</p>
+            <h2 class="refs-panel__title">Referencias</h2>
+            <ol class="refs__list">
+              <li>Gaarder, J. (1991). <em>El mundo de Sofía</em> [Lectura complementaria].</li>
+              <li>Scheler, M. (1913–1916). <em>El formalismo en la ética y la ética material de los valores</em>.</li>
+              <li>Universidad Científica del Sur. (2026). <em>Ficha de aprendizaje colaborativo AC3</em> [Material del curso HUM-010].</li>
+            </ol>
+          </section>
+        </article>
+
+        <!-- AC4 -->
+        <article id="ac4" class="post">
+          <figure class="cover">
+            <img class="cover__img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80&auto=format&fit=crop" alt="Representación de infraestructura tecnológica y negligencias éticas">
+            <figcaption class="cover__credit">Imagen: Unsplash · (reemplazar por la definitiva)</figcaption>
+          </figure>
+          <header class="post__header">
+            <p class="post__eyebrow">AC4 · Módulo I · Aspectos básicos de la ética</p>
+            <h1 class="post__title">Mapa de negligencias y acciones positivas en nuestro ámbito profesional</h1>
+            <div class="post__meta">
+              <span><strong>Sesión:</strong> Semana 4 · Sesión 4</span>
+              <span><strong>Alimenta:</strong> Manifiesto de Identidad Ética</span>
+              <span><strong>Equipo:</strong> Hilario · Enríquez · Marcacuzco · Cuba · Cuya</span>
+            </div>
+            <div class="post__tags">
+              <a class="tag-pill" href="#">Módulo I</a>
+              <a class="tag-pill" href="#">Falacias</a>
+              <a class="tag-pill" href="#">Posverdad</a>
+              <a class="tag-pill" href="#">Sócrates</a>
+              <a class="tag-pill" href="#">Platón</a>
+            </div>
+          </header>
+          <div class="prose">
+            <h2>La actividad</h2>
+            <p>Con este aprendizaje colaborativo cerramos el Manifiesto de Identidad Ética. Después de fijar hacia dónde vamos (AC1), a quiénes servimos (AC2) y desde qué valores decidimos (AC3), miramos con honestidad intelectual nuestro propio campo profesional en el Perú: qué fallas éticas existen hoy y qué acciones positivas puede ejercer la profesión por el país.</p>
+            <p>Trabajamos con la diferencia entre verdad lógica y verdad ética, las falacias del discurso profesional, la posverdad y el método socrático. Los complementamos con el mito de la caverna (Platón) y con el episodio <em>Caravana de la desinformación</em> (Radio Ambulante).</p>
+            <h2>Sombras: tres negligencias y la falacia que las sostiene</h2>
+            <h3>1. Violación de la privacidad · Apelación a la autoridad</h3>
+            <p>Caso Interbank (octubre de 2024): 3 millones de clientes expuestos por una brecha en un proveedor tercero.</p>
+            <blockquote><p>Confiar en un proveedor «porque ya está homologado» es una excusa cómoda para no hacer el trabajo de verificar. Nadie audita lo que ya da por seguro, y ese es justamente el problema: la seguridad no se delega, se vigila.</p></blockquote>
+            <p><strong>Población afectada (AC2): microempresarios informales.</strong> Dependen de la banca digital para cobrar y facturar; con sus datos filtrados quedan expuestos a fraude sin capacidad técnica de reclamo.</p>
+            <h3>2. Exclusión digital · Posverdad y generalización apresurada</h3>
+            <p>Al migrar servicios (banca, trámites, atención al cliente) se da por hecho que cualquiera puede completarlos en línea y se apaga el canal presencial o telefónico.</p>
+            <blockquote><p>Decir que «el Perú ya está digitalizado» es más una excusa para ahorrar costos que una descripción real del país. Es mucho más barato cerrar una ventanilla y decir «descárguese la app» que invertir en llegar a donde la señal no llega.</p></blockquote>
+            <p><strong>Población afectada (AC2): clientes de zonas con poca conectividad.</strong></p>
+            <h3>3. Negligencia en accesibilidad · Posverdad</h3>
+            <p>Plataformas de RENIEC, SUNAT y bancos aprobadas sin testeo real con personas con discapacidad.</p>
+            <blockquote><p>Aprobar un sistema porque «cumple los requisitos técnicos» sin haberlo probado con una persona real con discapacidad no es un descuido, es preferir la versión cómoda de los hechos antes que la incómoda.</p></blockquote>
+            <p><strong>Población afectada (AC2): personas con discapacidad.</strong></p>
+            <h2>Las sombras de nuestra caverna</h2>
+            <p>«Ya está homologado», «el Perú ya está digitalizado», «cumple los requisitos técnicos»: las tres frases funcionan como las sombras que los prisioneros de la caverna confunden con la realidad (Platón). Son creencias normalizadas en nuestro campo que impiden ver la falla, y las tres comparten la misma excusa: dar por resuelto lo que nunca se verificó.</p>
+            <h2>Nuestra pregunta socrática</h2>
+            <blockquote><p>¿Por qué en ingeniería de sistemas seguimos llamando «listo» a un sistema que nunca se probó con la persona que más lo necesita?</p></blockquote>
+            <h2>Cierre del Manifiesto</h2>
+            <blockquote><p>Empezamos con el Faro de La Punta: una luz que no pierde sentido por la niebla, sino porque quienes lo construyen dejan de mirar a quién están dejando fuera del puerto. Por eso decidimos priorizar los valores espirituales y vitales sobre los económicos, y hoy reconocemos que nuestro propio campo sostiene sus fallas —la confianza ciega en un proveedor, la digitalización que excluye, la accesibilidad que solo existe en el papel— con la misma excusa: dar por resuelto lo que nunca se verificó. Sostener el faro no es evitar que se apague, es dejar de fingir que todas las embarcaciones están a la vista cuando en realidad se quedaron fuera del haz de luz el microempresario, el usuario sin señal y la persona con discapacidad.</p></blockquote>
+          </div>
+          <section class="refs-panel">
+            <p class="refs-panel__eyebrow">✦ Bibliografía</p>
+            <h2 class="refs-panel__title">Referencias</h2>
+            <ol class="refs__list">
+              <li>Platón. (s. f.). <em>La República</em> (Libro VII) [Lectura complementaria].</li>
+              <li>Radio Ambulante. (s. f.). Caravana de la desinformación [Episodio de pódcast].</li>
+              <li>Universidad Científica del Sur. (2026). <em>Ficha de aprendizaje colaborativo AC4</em> [Material del curso HUM-010].</li>
+            </ol>
+          </section>
+        </article>
+
+        <!-- ROADMAP -->
+        <section id="ruta" class="block" style="scroll-margin-top:80px">
+          <div class="sec-head">
+            <p class="eyebrow">Hoja de ruta</p>
+            <h2 class="sec-head__title">Entregas del <span class="serif-em">semestre</span></h2>
+            <p class="sec-head__lead">4 de 10 hitos completados.</p>
+          </div>
+          <ol class="roadmap">
+            <li class="is-done"><span class="roadmap__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><p class="roadmap__title"><strong>AC1</strong> · <a href="#ac1">Metáfora artística y propósito de la carrera</a></p><p class="roadmap__sub">Semana 1 · Manifiesto</p></div><span class="roadmap__meta">Listo</span></li>
+            <li class="is-done"><span class="roadmap__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><p class="roadmap__title"><strong>AC2</strong> · <a href="#ac2">Poblaciones vulnerables y compromiso ético</a></p><p class="roadmap__sub">Semana 2 · Manifiesto</p></div><span class="roadmap__meta">Listo</span></li>
+            <li class="is-done"><span class="roadmap__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><p class="roadmap__title"><strong>AC3</strong> · <a href="#ac3">Jerarquía de valores y tensión axiológica</a></p><p class="roadmap__sub">Semana 3 · Manifiesto</p></div><span class="roadmap__meta">Listo</span></li>
+            <li class="is-done"><span class="roadmap__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><p class="roadmap__title"><strong>AC4</strong> · <a href="#ac4">Mapa de negligencias y acciones positivas</a></p><p class="roadmap__sub">Semana 4 · Manifiesto</p></div><span class="roadmap__meta">Listo</span></li>
+            <li class="is-todo"><span class="roadmap__dot"> </span><div><p class="roadmap__title"><strong>EC1</strong> · Presentación del Manifiesto completo</p><p class="roadmap__sub">Semana 5 · 18 % de la nota</p></div><span class="roadmap__meta">Próximamente</span></li>
+            <li class="is-todo"><span class="roadmap__dot"> </span><div><p class="roadmap__title"><strong>AC5–AC6</strong> · Guion del podcast</p><p class="roadmap__sub">Semanas 6–7</p></div><span class="roadmap__meta">Próximamente</span></li>
+            <li class="is-todo"><span class="roadmap__dot"> </span><div><p class="roadmap__title"><strong>AC7–AC9</strong> · Video-reacción</p><p class="roadmap__sub">Semanas 9–11</p></div><span class="roadmap__meta">Próximamente</span></li>
+            <li class="is-todo"><span class="roadmap__dot"> </span><div><p class="roadmap__title"><strong>EC2</strong> · Sustentación del portafolio</p><p class="roadmap__sub">Semana 12</p></div><span class="roadmap__meta">Próximamente</span></li>
+            <li class="is-todo"><span class="roadmap__dot"> </span><div><p class="roadmap__title"><strong>AC10–AC11</strong> · Infografía de integridad y sostenibilidad</p><p class="roadmap__sub">Semanas 13–14</p></div><span class="roadmap__meta">Próximamente</span></li>
+            <li class="is-todo"><span class="roadmap__dot"> </span><div><p class="roadmap__title"><strong>EC3</strong> · Sustentación final</p><p class="roadmap__sub">Semana 15</p></div><span class="roadmap__meta">Próximamente</span></li>
+          </ol>
+        </section>
+
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+        <p class="site-footer__brand">Brújula <span class="serif-em">Ética</span></p>
+        <p class="site-footer__meta">Ética y Deontología Profesional · HUM-010 · Universidad Científica del Sur · 2026-2</p>
+      </div>
+      <div>
+        <p class="site-footer__label">Elaborado por Sinergia Sistémica</p>
+        <p class="site-footer__meta">Jhoseph Hilario · Mathias Enríquez · Jorge Marcacuzco · Aisha Cuba · María Jesús Cuya</p>
+      </div>
+    </footer>
+  </div>
+
+</div>
+
+<aside class="music-dock is-collapsed" id="music-dock" aria-label="Banda sonora del portafolio">
+  <div class="music-dock__glow" aria-hidden="true"></div>
+  <button class="music-dock__toggle" type="button" id="music-toggle" aria-expanded="false" aria-controls="music-dock-body">
+    <span class="music-dock__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="music-dock__text">
+      <span class="music-dock__eyebrow">La canción de <span id="music-member">Jhoseph Hilario</span></span>
+      <span class="music-dock__now"><span id="music-title">Crazy</span> · <span id="music-artist">Seal</span></span>
+    </span>
+    <svg class="music-dock__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="music-dock__body" id="music-dock-body">
+    <div class="music-dock__tracks" role="tablist">
+      <button class="music-dock__track is-active" type="button" data-track="crazy" data-title="Crazy" data-artist="Seal" data-member="Jhoseph Hilario"><span class="music-dock__track-who">Jhoseph</span><span class="music-dock__track-name">Crazy</span></button>
+      <button class="music-dock__track" type="button" data-track="superpowers" data-title="Superpowers" data-artist="Daniel Caesar" data-member="Mathias Enríquez"><span class="music-dock__track-who">Mathias</span><span class="music-dock__track-name">Superpowers</span></button>
+      <button class="music-dock__track" type="button" data-track="sultans" data-title="Sultans of Swing" data-artist="Dire Straits" data-member="Jorge Marcacuzco"><span class="music-dock__track-who">Jorge</span><span class="music-dock__track-name">Sultans</span></button>
+      <button class="music-dock__track" type="button" data-track="relax" data-title="Relax My Eyes" data-artist="ANOTR, Abel Balder" data-member="Aisha Cuba"><span class="music-dock__track-who">Aisha</span><span class="music-dock__track-name">Relax My Eyes</span></button>
+      <button class="music-dock__track" type="button" data-track="loco" data-title="Loco por Volverte a Ver" data-artist="Chili Fernández" data-member="María Jesús Cuya"><span class="music-dock__track-who">María</span><span class="music-dock__track-name">Loco</span></button>
+    </div>
+    <div class="music-dock__frame">
+      <div class="music-dock__slot is-active" data-slot="crazy"><iframe title="Crazy — Seal" loading="lazy" allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" allowtransparency="true"></iframe></div>
+      <div class="music-dock__slot" data-slot="superpowers"><iframe title="Superpowers — Daniel Caesar" loading="lazy" allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" allowtransparency="true"></iframe></div>
+      <div class="music-dock__slot" data-slot="sultans"><iframe title="Sultans of Swing — Dire Straits" loading="lazy" allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" allowtransparency="true"></iframe></div>
+      <div class="music-dock__slot" data-slot="relax"><iframe title="Relax My Eyes — ANOTR, Abel Balder" loading="lazy" allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" allowtransparency="true"></iframe></div>
+      <div class="music-dock__slot" data-slot="loco"><iframe title="Loco por Volverte a Ver — Chili Fernández" loading="lazy" allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" allowtransparency="true"></iframe></div>
+    </div>
+  </div>
+</aside>
+
+<button class="back-to-top" type="button" id="back-to-top" aria-label="Volver al inicio">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
