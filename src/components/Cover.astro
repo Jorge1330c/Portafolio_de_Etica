@@ -1,0 +1,38 @@
+---
+import { Image, type ImageMetadata } from 'astro:assets';
+
+interface Props {
+  cover?: { src: ImageMetadata; alt?: string; credit?: string };
+  surface?: 'peach' | 'mint' | 'yellow' | 'mustard' | 'canvas';
+  number: string;
+  topic: string;
+  variant?: 'hero' | 'card';
+}
+
+const { cover, surface = 'canvas', number, topic, variant = 'hero' } = Astro.props;
+const fallbackClass = surface === 'canvas' ? 'cover-fallback--coral' : `cover-fallback--${surface}`;
+---
+
+{cover ? (
+  <figure class={`cover cover--${variant}`}>
+    <Image
+      src={cover.src}
+      alt={cover.alt ?? ''}
+      loading={variant === 'hero' ? 'eager' : 'lazy'}
+      decoding="async"
+      widths={variant === 'hero' ? [640, 960, 1280, 1600] : [320, 480, 640]}
+      sizes={variant === 'hero'
+        ? '(min-width: 1200px) 1080px, (min-width: 768px) 92vw, 100vw'
+        : '(min-width: 1024px) 240px, 40vw'}
+      class="cover__img"
+    />
+    {cover.credit && variant === 'hero' && (
+      <figcaption class="cover__credit">{cover.credit}</figcaption>
+    )}
+  </figure>
+) : (
+  <div class={`cover cover--${variant} cover-fallback ${fallbackClass}`} aria-hidden="true">
+    <span class="cover-fallback__number">{number}</span>
+    <span class="cover-fallback__topic">{topic}</span>
+  </div>
+)}
