@@ -1,0 +1,33 @@
+---
+interface Props {
+  drive?: string;
+  youtube?: string;
+  title?: string;
+  eyebrow?: string;
+  caption?: string;
+}
+
+const { drive, youtube, title, eyebrow = 'Video del equipo', caption } = Astro.props;
+if (!drive && !youtube) throw new Error('<Video /> requires either drive="..." or youtube="..."');
+
+const provider = drive ? 'drive' : 'youtube';
+const embedUrl = drive
+  ? `https://drive.google.com/file/d/${drive}/preview`
+  : `https://www.youtube-nocookie.com/embed/${youtube}?rel=0&modestbranding=1`;
+---
+
+<figure class={`video video--${provider}`}>
+  <header class="video__head">
+    <span class="video__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+    </span>
+    <div class="video__meta">
+      <p class="video__eyebrow">{eyebrow}</p>
+      {title && <p class="video__title">{title}</p>}
+    </div>
+  </header>
+  <div class={`video__frame video__frame--${provider}`}>
+    <iframe src={embedUrl} title={title ?? 'Video del equipo'} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  {caption && <figcaption class="video__caption">{caption}</figcaption>}
+</figure>
