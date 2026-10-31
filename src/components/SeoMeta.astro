@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  canonical?: string;
+}
+
+const { title, description, image, type = 'website', canonical } = Astro.props;
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const path = Astro.url.pathname;
+const url = canonical ?? `${site}${path}`;
+const ogImage = image ?? `${site}/og-default.jpg`;
+
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'Ética y Deontología Profesional',
+  courseCode: 'HUM-010',
+  description,
+  provider: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Universidad Científica del Sur',
+    sameAs: 'https://www.cientifica.edu.pe'
+  }
+};
+
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'Brújula Ética · Sinergia Sistémica',
+  url,
+  sameAs: ['https://github.com/angel5002/Portafolio-Digital']
+};
+---
+
+<link rel="canonical" href={url} />
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="es_PE" />
+<meta property="og:site_name" content="Brújula Ética" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(courseSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
