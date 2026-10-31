@@ -17,15 +17,18 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SITE: https://${{ github.repository_owner }}.github.io
+      BASE: /${{ github.event.repository.name }}/
     steps:
+      # Versiones que corren sobre Node 24 (Node 20 está en desuso en los runners)
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install, build, and upload site
-        uses: withastro/action@v3
+        uses: withastro/action@v6
         with:
           node-version: 24
-          package-manager: npm
 
   deploy:
     needs: build
@@ -36,4 +39,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
