@@ -1,0 +1,40 @@
+---
+import { withBase } from '../lib/paths';
+
+interface Crumb { label: string; href?: string; }
+interface Props { crumbs?: Crumb[]; }
+
+const { crumbs = [] } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const home = withBase(base, '');
+const isHome = crumbs.length === 0 || (crumbs.length === 1 && crumbs[0].label.toLowerCase() === 'inicio');
+---
+
+<div id="topbar">
+  <div class="topbar__inner">
+    <button class="topbar__trigger" type="button" data-sidebar-trigger aria-controls="sidebar" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      {isHome ? (
+        <span class="breadcrumb__current">Inicio</span>
+      ) : (
+        <>
+          <a href={home}>Inicio</a>
+          {crumbs.map((c, idx) => (
+            <>
+              <span class="breadcrumb__sep" aria-hidden="true">›</span>
+              {c.href && idx < crumbs.length - 1 ? <a href={c.href}>{c.label}</a> : <span class="breadcrumb__current">{c.label}</span>}
+            </>
+          ))}
+        </>
+      )}
+    </nav>
+
+    <button class="topbar__theme" type="button" data-theme-toggle aria-label="Cambiar tema" title="Cambiar tema (claro/oscuro)">
+      <svg class="topbar__theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"></path></svg>
+      <svg class="topbar__theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+    </button>
+  </div>
+</div>
