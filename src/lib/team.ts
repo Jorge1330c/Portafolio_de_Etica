@@ -1,9 +1,4 @@
 import type { ImageMetadata } from 'astro:assets';
-import jhoseph from '../assets/images/equipo/jhoseph.jpg';
-import mathias from '../assets/images/equipo/mathias.jpg';
-import jorge from '../assets/images/equipo/jorge.jpg';
-import aisha from '../assets/images/equipo/aisha.jpg';
-import maria from '../assets/images/equipo/maria.jpg';
 
 export interface Member {
   id: string;
