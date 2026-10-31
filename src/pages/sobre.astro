@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Roadmap from '../components/Roadmap.astro';
+import campus from '../assets/images/varios/Universidad_Cientifica_img_1.png';
+import { COURSE } from '../lib/portfolio';
+import { TEAM_NAME, CAREER } from '../lib/team';
+
+const meta = [
+  { label: 'Código', value: COURSE.code },
+  { label: 'Ciclo', value: COURSE.cycle },
+  { label: 'Equipo', value: TEAM_NAME },
+  { label: 'Carrera', value: CAREER },
+  { label: 'Docente', value: COURSE.teacher },
+  { label: 'Departamento', value: `Cursos Básicos · ${COURSE.universityShort}` }
+];
+
+const modules = [
+  { n: 'Módulo I', title: 'Aspectos básicos de la ética', body: 'Telos, areté y eudaimonía (Aristóteles); dignidad y bioética; jerarquía de valores de Scheler. Producto: Manifiesto de Identidad Ética.' },
+  { n: 'Módulo II', title: 'Teorías éticas en tensión', body: 'El deber kantiano frente al utilitarismo de Mill aplicados a un dilema real del contexto peruano. Producto: podcast.' },
+  { n: 'Módulo III', title: 'Deontología y presión de decisión', body: 'Vacíos normativos, tensiones ético-legales, Weber y Levinas. Producto: video-reacción crítico a nuestro propio podcast.' },
+  { n: 'Módulo IV', title: 'Integridad y sostenibilidad', body: 'Ética del cuidado y ecoética: responsabilidad con la población vulnerable y con las generaciones futuras. Producto: infografía.' }
+];
+
+const evals = [
+  ['EC1', 'Manifiesto de Identidad Ética', 'Semana 5', '18 %'],
+  ['EC2', 'Sustentación del portafolio', 'Semana 12', '—'],
+  ['EC3', 'Sustentación final del portafolio', 'Semana 15', '—']
+];
+---
+
+<BaseLayout
+  title={`Sobre el curso · ${COURSE.portfolioName}`}
+  description={`Información general del curso ${COURSE.code} — ${COURSE.name}.`}
+  crumbs={[{ label: 'Sobre el curso' }]}
+>
+  <section class="hero-cover" aria-labelledby="hero-cover-title">
+    <Image src={campus} alt="Campus de la Universidad Científica del Sur" widths={[640, 960, 1280, 1600, 1920]} sizes="(min-width: 1200px) 1080px, 92vw" loading="eager" decoding="async" class="hero-cover__img" />
+    <div class="hero-cover__overlay" aria-hidden="true"></div>
+    <div class="hero-cover__text">
+      <p class="hero-cover__eyebrow">Sobre el curso</p>
+      <h1 id="hero-cover-title" class="hero-cover__title">{COURSE.name}</h1>
+      <p class="hero-cover__lead">
+        {COURSE.code} · {COURSE.university} · Ciclo {COURSE.cycle}.
+        Curso del Departamento de Cursos Básicos que trabaja propósito profesional,
+        responsabilidad, valores y sostenibilidad aplicados a cada carrera.
+      </p>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2 class="info-section__title">Información del curso</h2>
+    <dl class="home-meta">
+      {meta.map((row) => (<div><dt>{row.label}</dt><dd>{row.value}</dd></div>))}
+    </dl>
+  </section>
+
+  <section class="info-section">
+    <h2 class="info-section__title">Módulos</h2>
+    <div class="module-grid">
+      {modules.map((m) => (<article class="module-card"><p class="module-card__eyebrow">{m.n}</p><p class="module-card__title">{m.title}</p><p class="module-card__body">{m.body}</p></article>))}
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2 class="info-section__title">Evaluaciones del portafolio</h2>
+    <div class="eval-table">
+      <div class="eval-table__row eval-table__row--head"><span>Cód.</span><span>Detalle</span><span>Semana</span><span>Peso</span></div>
+      {evals.map((row) => (<div class="eval-table__row"><span>{row[0]}</span><span>{row[1]}</span><span>{row[2]}</span><span>{row[3]}</span></div>))}
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2 class="info-section__title">Hoja de ruta del portafolio</h2>
+    <Roadmap />
+  </section>
+</BaseLayout>
