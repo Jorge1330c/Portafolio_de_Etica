@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { slugify, withBase } from '../../lib/paths';
+import { COURSE } from '../../lib/portfolio';
+
+const entries = await getCollection('bitacora');
+const base = import.meta.env.BASE_URL;
+
+const counts = new Map<string, { label: string; count: number }>();
+for (const e of entries) {
+  for (const tag of e.data.tags ?? []) {
+    const slug = slugify(tag);
+    if (!slug) continue;
+    const existing = counts.get(slug);
+    if (existing) existing.count += 1;
+    else counts.set(slug, { label: tag, count: 1 });
+  }
+}
+
+const tags = Array.from(counts.entries()).map(([slug, info]) => ({ slug, ...info })).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+---
+
+<BaseLayout title={`Etiquetas · ${COURSE.portfolioName}`} crumbs={[{ label: 'Etiquetas' }]}>
+  <header class="page-header">
+    <h1 class="page-header__title">Etiquetas</h1>
+    <p class="page-header__lead">{tags.length} etiquetas en uso. Haz clic en cualquiera para filtrar las entradas de la bitácora donde aparece.</p>
+  </header>
+
+  <section class="tag-cloud tag-cloud--lg">
+    {tags.map((t) => (
+      <a class="tag-pill tag-pill--lg" href={withBase(base, `tags/${t.slug}`)}>
+        <span>{t.label}</span>
+        <span class="tag-pill__count" aria-label={`${t.count} entradas`}>{t.count}</span>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
