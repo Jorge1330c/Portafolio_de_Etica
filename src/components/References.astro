@@ -1,0 +1,38 @@
+---
+import { referencesFor } from '../lib/referencias';
+
+interface Props {
+  code: string;
+  label?: string;
+}
+
+const { code, label } = Astro.props;
+const items = referencesFor(code);
+---
+
+{items.length > 0 && (label ? (
+  <div class="refs-group" id={`referencias-${code.toLowerCase()}`}>
+    <p class="refs-group__head"><span class="refs-chip">{code}</span>{label}</p>
+    <ol class="refs__list">
+      {items.map((r) => (
+        <li>
+          {r.lead}{' '}{r.title && <em>{r.title}</em>}{r.rest}
+          {r.url && <>{' '}<a href={r.url} target="_blank" rel="noreferrer">{r.url}</a></>}
+        </li>
+      ))}
+    </ol>
+  </div>
+) : (
+  <section class="refs-panel" aria-labelledby="referencias-title">
+    <p class="refs-panel__eyebrow">✦ Bibliografía</p>
+    <h2 class="refs-panel__title" id="referencias-title">Referencias</h2>
+    <ol class="refs__list">
+      {items.map((r) => (
+        <li>
+          {r.lead}{' '}{r.title && <em>{r.title}</em>}{r.rest}
+          {r.url && <>{' '}<a href={r.url} target="_blank" rel="noreferrer">{r.url}</a></>}
+        </li>
+      ))}
+    </ol>
+  </section>
+))}
