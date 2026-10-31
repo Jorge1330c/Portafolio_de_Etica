@@ -1,0 +1,62 @@
+---
+import { SOUNDTRACK } from '../lib/portfolio';
+
+const first = SOUNDTRACK[0];
+const firstName = (n: string) => n.split(' ')[0];
+---
+
+{first && (
+  <aside class="music-dock is-collapsed" data-music-dock aria-label="Banda sonora del portafolio">
+    <div class="music-dock__glow" aria-hidden="true"></div>
+
+    <button class="music-dock__toggle" type="button" data-music-toggle aria-expanded="false" aria-controls="music-dock-body">
+      <span class="music-dock__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="music-dock__text">
+        <span class="music-dock__eyebrow">La canción de <span data-music-member>{first.memberName}</span></span>
+        <span class="music-dock__now"><span data-music-title>{first.title}</span> · <span data-music-artist>{first.artist}</span></span>
+      </span>
+      <svg class="music-dock__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+
+    <div class="music-dock__body" id="music-dock-body">
+      {SOUNDTRACK.length > 1 && (
+        <div class="music-dock__tracks" role="tablist" aria-label="Canciones del equipo">
+          {SOUNDTRACK.map((t, i) => (
+            <button
+              id={`music-tab-${t.spotify}`}
+              class:list={['music-dock__track', { 'is-active': i === 0 }]}
+              type="button"
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-controls={`music-panel-${t.spotify}`}
+              tabindex={i === 0 ? 0 : -1}
+              data-music-track={t.spotify}
+              data-title={t.title}
+              data-artist={t.artist}
+              data-member={t.memberName}
+              title={`${t.title} · ${t.artist} — elegida por ${t.memberName}`}
+            >
+              <span class="music-dock__track-who">{firstName(t.memberName)}</span>
+              <span class="music-dock__track-name">{t.title}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      <div class="music-dock__frame">
+        <p class="music-dock__hint" aria-hidden="true">Cargando reproductor…</p>
+        {SOUNDTRACK.map((t, i) => (
+          <div
+            id={`music-panel-${t.spotify}`}
+            class:list={['music-dock__slot', { 'is-active': i === 0 }]}
+            role="tabpanel"
+            aria-labelledby={`music-tab-${t.spotify}`}
+            data-music-slot={t.spotify}
+            data-label={`${t.title} — ${t.artist}`}
+          >
+            <div data-music-mount></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </aside>
+)}
