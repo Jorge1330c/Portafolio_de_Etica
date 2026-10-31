@@ -1,15 +1,21 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
-const SITE = process.env.SITE || 'https://example.github.io';
-const BASE = process.env.BASE || '/';
+// Forzamos la ruta de tu repositorio para evitar errores en GitHub Pages
+const SITE = 'https://jorge1330c.github.io';
+const BASE = '/Portafolio_de_Etica/';
 
-// https://astro.build/config
 export default defineConfig({
   site: SITE,
   base: BASE,
   trailingSlash: 'ignore',
   build: { format: 'directory' },
-  integrations: [mdx()]
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes('/tags/')
+    })
+  ]
 });
