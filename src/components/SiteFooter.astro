@@ -1,0 +1,18 @@
+---
+import { COURSE } from '../lib/portfolio';
+import { TEAM_NAME, team } from '../lib/team';
+
+const names = team.map((m) => m.name).join(' · ');
+---
+
+<footer class="site-footer">
+  <div>
+    <p class="site-footer__brand">Brújula <span class="serif-em">Ética</span></p>
+    <p class="site-footer__meta">{COURSE.name} · {COURSE.code} · {COURSE.university} · {COURSE.cycle}</p>
+  </div>
+  <div class="site-footer__team">
+    <p class="site-footer__label">Elaborado por {TEAM_NAME}</p>
+    <p class="site-footer__meta">{names}</p>
+    {COURSE.teacher && <p class="site-footer__meta">Docente responsable: {COURSE.teacher}</p>}
+  </div>
+</footer>
