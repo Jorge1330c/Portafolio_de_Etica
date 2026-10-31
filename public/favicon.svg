@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Degradado de verde menta a dorado (estilo ópalo) -->
+    <linearGradient id="compass-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#86e3bb" />
+      <stop offset="100%" stop-color="#e6c079" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fondo oscuro redondeado (color base del tema dark) -->
+  <rect width="512" height="512" rx="120" fill="#080b16" />
+  
+  <!-- Círculo exterior de la brújula -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="url(#compass-grad)" stroke-width="28" />
+  
+  <!-- Aguja de la brújula (forma de rombo diagonal) -->
+  <polygon points="350,162 270,270 162,350 242,242" fill="url(#compass-grad)" />
+  
+  <!-- Círculo central (simula el pivote de la brújula) -->
+  <circle cx="256" cy="256" r="22" fill="#080b16" />
+</svg>
