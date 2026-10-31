@@ -1,0 +1,30 @@
+---
+import { Image, type ImageMetadata } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt?: string;
+  caption?: string;
+  credit?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  src, alt = '', caption, credit,
+  widths = [480, 760, 1100, 1400],
+  sizes = '(min-width: 1200px) 720px, (min-width: 768px) 70vw, 92vw',
+  loading = 'lazy'
+} = Astro.props;
+---
+
+<figure class="figure">
+  <Image src={src} alt={alt} widths={widths} sizes={sizes} loading={loading} decoding="async" class="figure__img" />
+  {(caption || credit) && (
+    <figcaption class="figure__caption">
+      {caption && <span class="figure__caption-text">{caption}</span>}
+      {credit && <span class="figure__credit">{credit}</span>}
+    </figcaption>
+  )}
+</figure>
