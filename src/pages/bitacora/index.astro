@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { withBase } from '../../lib/paths';
+import { COURSE } from '../../lib/portfolio';
+
+const entries = (await getCollection('bitacora')).sort((a, b) => a.data.order - b.data.order);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`Bitácora · ${COURSE.portfolioName}`} description="Archivo de todos los aprendizajes colaborativos publicados." crumbs={[{ label: 'Bitácora' }]}>
+  <header class="page-header">
+    <p class="page-header__eyebrow">Archivo</p>
+    <h1 class="page-header__title">Bitácora <span class="serif-em">semanal</span></h1>
+    <p class="page-header__lead">
+      {entries.length} {entries.length === 1 ? 'aprendizaje colaborativo publicado' : 'aprendizajes colaborativos publicados'} hasta hoy,
+      en orden cronológico. Cada entrada corresponde a una ficha trabajada en clase.
+    </p>
+  </header>
+
+  <section id="post-list" class="reveal-stagger" data-tilt-group>
+    {entries.map((e, i) => (
+      <PostCard href={withBase(base, `bitacora/${e.id}`)} title={e.data.title} excerpt={e.data.summary} date={e.data.date} topic={e.data.topic} number={e.data.number} surface={e.data.surface} cover={e.data.cover} pinned={i === entries.length - 1} />
+    ))}
+  </section>
+</BaseLayout>
