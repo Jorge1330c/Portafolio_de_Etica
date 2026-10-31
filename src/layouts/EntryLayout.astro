@@ -1,0 +1,62 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Cover from '../components/Cover.astro';
+import Gallery from '../components/Gallery.astro';
+import Music from '../components/Music.astro';
+import References from '../components/References.astro';
+import { slugify, withBase } from '../lib/paths';
+import { COURSE } from '../lib/portfolio';
+import type { ImageMetadata } from 'astro:assets';
+
+interface Props {
+  number: string;
+  title: string;
+  topic: string;
+  date: string;
+  section?: string;
+  authors?: string[];
+  tags?: string[];
+  surface?: 'peach' | 'mint' | 'yellow' | 'mustard' | 'canvas';
+  cover?: { src: ImageMetadata; alt?: string; credit?: string };
+  gallery?: { src: ImageMetadata; alt?: string; caption?: string; credit?: string }[];
+  music?: { spotify?: string; youtube?: string; title?: string; note?: string };
+}
+
+const {
+  number, title, topic, date, section = 'Manifiesto', authors = [], tags = [], surface = 'canvas', cover, gallery, music
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const crumbs = [{ label: 'Bitácora', href: withBase(base, 'bitacora') }, { label: number }];
+---
+
+<BaseLayout title={`${title} · ${COURSE.portfolioName}`} description={topic} crumbs={crumbs}>
+  <article class="post">
+    <Cover cover={cover} surface={surface} number={number} topic={topic} variant="hero" />
+
+    <header class="post__header">
+      <p class="post__eyebrow">{number} · {topic}</p>
+      <h1 class="post__title">{title}</h1>
+      <div class="post__meta">
+        <span><strong>Sesión:</strong> {date}</span>
+        <span><strong>Alimenta:</strong> {section}</span>
+        {authors.length > 0 && <span><strong>Equipo:</strong> {authors.join(' · ')}</span>}
+      </div>
+      {tags.length > 0 && (
+        <div class="post__tags">
+          {tags.map((tag) => (
+            <a class="tag-pill" href={withBase(base, `tags/${slugify(tag)}`)}><span>{tag}</span></a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {music && <Music spotify={music.spotify} youtube={music.youtube} title={music.title} note={music.note} />}
+
+    <div class="prose"><slot /></div>
+
+    {gallery && gallery.length > 0 && <Gallery items={gallery} heading="Material visual de la sesión" />}
+
+    <References code={number} />
+  </article>
+</BaseLayout>
