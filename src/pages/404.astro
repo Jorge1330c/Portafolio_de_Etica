@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+import { COURSE } from '../lib/portfolio';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`Página no encontrada · ${COURSE.portfolioName}`}>
+  <section class="page-header">
+    <p class="page-header__eyebrow">Error 404</p>
+    <h1 class="page-header__title">Esta página se perdió <span class="serif-em">en la niebla</span></h1>
+    <p class="page-header__lead">
+      Como en nuestra metáfora, ni el mejor faro puede guiar a un barco que no aparece en el mapa.
+      La página que buscas no existe o cambió de rumbo.
+    </p>
+  </section>
+
+  <div class="hero__cta">
+    <a class="btn btn--primary" href={withBase(base, '')} data-magnetic>
+      Volver al puerto (Inicio)
+    </a>
+    <a class="btn btn--ghost" href={withBase(base, 'bitacora')} data-magnetic>
+      Ir a la bitácora
+    </a>
+  </div>
+</BaseLayout>
