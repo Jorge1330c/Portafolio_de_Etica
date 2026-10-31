@@ -1,0 +1,185 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import SectionCard from '../components/SectionCard.astro';
+import Roadmap from '../components/Roadmap.astro';
+import { withBase } from '../lib/paths';
+import { COURSE, sections, progress } from '../lib/portfolio';
+import { TEAM_NAME, CAREER, team } from '../lib/team';
+import faro from '../assets/images/manifiesto/faro-la-punta.jpg';
+
+const entries = (await getCollection('bitacora')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const base = import.meta.env.BASE_URL;
+const prog = progress();
+---
+
+<BaseLayout title={`${COURSE.portfolioName} · Portafolio digital ${COURSE.code}`}>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__inner">
+      <div class="hero__badge">✦ {COURSE.name} · {COURSE.cycle}</div>
+
+      <h1 id="hero-title" class="hero__title">Brújula<em>Ética</em></h1>
+      
+      <p class="hero__subtitle">
+        Portafolio digital de identidad ética profesional
+        <br />
+        <span style="font-size: 0.85em; font-style: italic; color: var(--accent-text);">
+          De la incertidumbre de los datos… hacia decisiones seguras.
+        </span>
+      </p>
+
+      <div class="hero__divider" aria-hidden="true"></div>
+
+      <p class="hero__desc">
+        Aquí reunimos el trabajo del equipo durante el curso: el Manifiesto de
+        Identidad Ética, el podcast sobre un dilema profesional, el video-reacción
+        y la infografía final.
+      </p>
+
+      <dl class="hero__meta">
+        <div><dt>Curso</dt><dd>{COURSE.name}</dd></div>
+        <div><dt>Carrera</dt><dd>{CAREER}</dd></div>
+        <div><dt>Semestre</dt><dd>{COURSE.cycle}</dd></div>
+        <div><dt>Equipo</dt><dd>{TEAM_NAME}</dd></div>
+        {COURSE.teacher && <div><dt>Docente</dt><dd>{COURSE.teacher}</dd></div>}
+      </dl>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href={withBase(base, 'manifiesto')} data-magnetic>
+          Leer el Manifiesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a class="btn btn--ghost" href={withBase(base, 'equipo')} data-magnetic>Conócenos</a>
+      </div>
+
+      <a class="hero__scroll" href="#secciones">
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+        Ver las secciones
+      </a>
+    </div>
+
+    <div class="hero__visual">
+      <div class="pedestal">
+        <div class="pedestal__glow" aria-hidden="true"></div>
+        <div class="pedestal__compass" aria-hidden="true">
+          <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="0.8">
+            <circle cx="200" cy="200" r="196" stroke-dasharray="2 6" />
+            <circle cx="200" cy="200" r="168" opacity="0.6" />
+            <circle cx="200" cy="200" r="120" stroke-dasharray="1 5" opacity="0.7" />
+            <g opacity="0.85">
+              <line x1="200" y1="4" x2="200" y2="396" />
+              <line x1="4" y1="200" x2="396" y2="200" />
+              <line x1="61" y1="61" x2="339" y2="339" opacity="0.5" />
+              <line x1="339" y1="61" x2="61" y2="339" opacity="0.5" />
+            </g>
+            <polygon points="200,28 208,200 200,372 192,200" fill="currentColor" opacity="0.18" stroke="none" />
+            <polygon points="28,200 200,192 372,200 200,208" fill="currentColor" opacity="0.18" stroke="none" />
+            <g fill="currentColor" stroke="none">
+              <circle cx="200" cy="28" r="2.6" />
+              <circle cx="372" cy="200" r="2.2" />
+              <circle cx="200" cy="372" r="2.2" />
+              <circle cx="28" cy="200" r="2.2" />
+              <circle cx="318" cy="82" r="1.6" />
+              <circle cx="82" cy="318" r="1.6" />
+              <circle cx="318" cy="318" r="1.6" />
+              <circle cx="82" cy="82" r="1.6" />
+            </g>
+          </svg>
+        </div>
+        <a class="pedestal__frame" href={withBase(base, 'manifiesto')} aria-label="Nuestra metáfora artística: El Faro de La Punta">
+          <Image
+            src={faro}
+            alt="Faro de La Punta iluminando la noche y guiando embarcaciones hacia el puerto"
+            widths={[480, 720, 960]}
+            sizes="(min-width: 1024px) 420px, 92vw"
+            loading="eager"
+            decoding="async"
+          />
+          <span class="pedestal__caption">
+            <span>Nuestra metáfora</span>
+            <strong>El Faro de La Punta</strong>
+          </span>
+        </a>
+        <div class="pedestal__stand" aria-hidden="true"></div>
+      </div>
+
+      <div class="opal-pills" aria-label="Estado del portafolio">
+        <a class="opal-pill" href={withBase(base, 'bitacora')}>
+          <span class="opal-pill__value">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span data-count={prog.done}>{prog.done}</span>
+          </span>
+          <span class="opal-pill__label">AC listos</span>
+        </a>
+        <a class="opal-pill" href={withBase(base, 'sobre')}>
+          <span class="opal-pill__value">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+            <span data-count={prog.pct}>{prog.pct}</span><small style="font-size: 0.55em;">%</small>
+          </span>
+          <span class="opal-pill__label">Avance</span>
+        </a>
+        <a class="opal-pill" href={withBase(base, 'equipo')}>
+          <span class="opal-pill__value">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path></svg>
+            <span data-count={team.length}>{team.length}</span>
+          </span>
+          <span class="opal-pill__label">Integrantes</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="secciones" class="block reveal" aria-labelledby="secciones-title">
+    <div class="sec-head">
+      <p class="eyebrow">Estructura del portafolio</p>
+      <h2 id="secciones-title" class="sec-head__title">Las cinco <span class="serif-em">secciones</span></h2>
+      <p class="sec-head__lead">
+        Siguen el orden de los cuatro módulos del curso, el mismo en que construimos el portafolio.
+      </p>
+    </div>
+    <div class="section-grid reveal-stagger">
+      {sections.map((s) => <SectionCard section={s} />)}
+    </div>
+  </section>
+
+  <section class="block reveal" aria-labelledby="bitacora-title">
+    <div class="sec-head">
+      <p class="eyebrow">Bitácora</p>
+      <h2 id="bitacora-title" class="sec-head__title">Trabajo por <span class="serif-em">sesión</span></h2>
+      <p class="sec-head__lead">
+        Una entrada por aprendizaje colaborativo, con lo que produjimos en clase
+        y, cuando la hubo, la canción que nos acompañó esa sesión.
+      </p>
+    </div>
+    <div id="post-list" class="reveal-stagger" data-tilt-group>
+      {entries.map((e, i) => (
+        <PostCard
+          href={withBase(base, `bitacora/${e.id}`)}
+          title={e.data.title}
+          excerpt={e.data.summary}
+          date={e.data.date}
+          topic={e.data.topic}
+          number={e.data.number}
+          surface={e.data.surface}
+          cover={e.data.cover}
+          pinned={i === entries.length - 1}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="block reveal" aria-labelledby="ruta-title">
+    <div class="sec-head">
+      <p class="eyebrow">Hoja de ruta</p>
+      <h2 id="ruta-title" class="sec-head__title">Entregas del <span class="serif-em">semestre</span></h2>
+      <p class="sec-head__lead">
+        {prog.done} de {prog.total} hitos completados.
+      </p>
+    </div>
+    <Roadmap />
+  </section>
+</BaseLayout>
