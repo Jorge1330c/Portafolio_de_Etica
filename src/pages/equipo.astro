@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { COURSE } from '../lib/portfolio';
+import { team, TEAM_NAME, CAREER } from '../lib/team';
+---
+
+<BaseLayout
+  title={`Equipo · ${COURSE.portfolioName}`}
+  description={`Integrantes del equipo ${TEAM_NAME}, curso ${COURSE.name}.`}
+  crumbs={[{ label: 'Equipo' }]}
+>
+  <header class="page-header">
+    <p class="page-header__eyebrow">Nuestro equipo</p>
+    <h1 class="page-header__title">Quiénes <span class="serif-em">somos</span></h1>
+    <p class="page-header__lead">
+      Somos cinco estudiantes de {CAREER} y nos llamamos {TEAM_NAME}.
+      Aquí presentamos a cada integrante: quiénes somos, qué buscamos y la canción
+      que cada uno eligió para representarse.
+    </p>
+  </header>
+
+  <section class="team-banner reveal">
+    <div>
+      <p class="eyebrow eyebrow--plain">Cómo nos llamamos</p>
+      <p class="team-banner__name"><span>{TEAM_NAME}</span></p>
+      <p class="team-banner__text">
+        Elegimos este nombre porque entendemos la organización como un sistema vivo donde cada parte afecta al todo. 
+        La sinergia es el esfuerzo coordinado de personas y procesos para lograr un impacto mayor que la suma de las partes, 
+        siempre guiados por la ética y la responsabilidad social.
+      </p>
+    </div>
+    <div class="opal-pills">
+      <span class="opal-pill">
+        <span class="opal-pill__value"><span data-count={team.length}>{team.length}</span></span>
+        <span class="opal-pill__label">Integrantes</span>
+      </span>
+      <span class="opal-pill">
+        <span class="opal-pill__value">1</span>
+        <span class="opal-pill__label">Carrera</span>
+      </span>
+    </div>
+  </section>
+
+  <section class="member-grid reveal-stagger" aria-label="Integrantes">
+    {team.map((m) => (
+      <article class="member-card" id={m.id} data-tilt>
+        <div class={`member-card__photo${m.hasPhoto ? '' : ' member-card__photo--placeholder'}`} style={m.photoPos ? `--photo-pos: ${m.photoPos}` : undefined}>
+          {m.hasPhoto ? (
+            <Image
+              src={m.photo}
+              alt={`Foto de ${m.fullName}`}
+              widths={[320, 480, 640]}
+              sizes="(min-width: 1200px) 260px, (min-width: 768px) 33vw, 92vw"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <Image src={m.photo} alt="" width={200} height={200} loading="lazy" />
+          )}
+        </div>
+        <div class="member-card__body">
+          <p class="member-card__name">{m.fullName}</p>
+          <p class="member-card__career">{m.career}</p>
+          {m.bio && <p class="member-card__bio">{m.bio}</p>}
+          {m.song && (
+            <a
+              class="member-card__song"
+              href={`https://open.spotify.com/track/${m.song.spotify}`}
+              target="_blank"
+              rel="noreferrer"
+              data-play-track={m.song.spotify}
+              title="Escuchar en el reproductor del portafolio"
+            >
+              <span class="member-card__song-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+              </span>
+              <span class="member-card__song-text">
+                <span class="member-card__song-label">Mi canción</span>
+                <span class="member-card__song-title">{m.song.title} · {m.song.artist}</span>
+              </span>
+            </a>
+          )}
+          <div class="member-card__foot">
+            <span class="member-card__code" title="Código de estudiante">{m.code}</span>
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
