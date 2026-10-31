@@ -1,0 +1,245 @@
+// Tokens del portafolio "Brújula Ética".
+// Atmósfera: cielo nocturno índigo, estrellas y acentos cálidos (dorado, ámbar).
+// El tema oscuro es el predeterminado.
+
+:root {
+  // ─── Tokens crudos (tema claro, papel cálido) ───────────────────────────
+  --color-ink: #151b2e;
+  --color-body: #343b50;
+  --color-muted: #5f6780;
+  --color-hairline: #e1e4ec;
+  --color-canvas: #f4f5f9;
+  --color-surface-soft: #eceef5;
+  --color-surface-strong: #dfe2ec;
+  --color-surface-dark: #0f1428;
+  --color-surface-dark-elevated: #161c34;
+
+  // Superficies de portada (tarjetas sin imagen)
+  --color-signature-coral: #a8452b;
+  --color-signature-forest: #1f3a2e;
+  --color-signature-cream: #f3e9d2;
+  --color-signature-peach: #e9b784;
+  --color-signature-mint: #bfd6c2;
+  --color-signature-yellow: #ead27a;
+  --color-signature-mustard: #cfa54a;
+  --color-on-primary: #ffffff;
+  --color-on-dark: #ffffff;
+  --color-info-border: #c9a24a;
+
+  // ─── Paleta cálida compartida ────────────────────────────────────────────
+  --warm-ivory: #f6efe0;
+  --warm-sand: #ecdcb8;
+  --warm-gold-300: #f0d59a;
+  --warm-gold-400: #e6c079;
+  --warm-gold-500: #c9a24a;
+  --warm-amber-400: #f0a35e;
+  --warm-rose-400: #d98a7a;
+  --night-lavender: #9aa3d4;
+
+  // Tipografía
+  --font-display: "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Instrument Serif", "Iowan Old Style", "Georgia", serif;
+
+  // Espaciado
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: 96px;
+
+  // Radios
+  --radius-xs: 2px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  // Layout
+  --sidebar-width: 260px;
+  --sidebar-width-lg: 300px;
+  --topbar-height: 56px;
+  --content-max: 1120px;
+  --rail-width: 240px;
+
+  // Movimiento
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --motion-slow: 560ms;
+
+  // ─── TEMA CLARO: papel frío, tinta índigo, detalles en bronce ───────────
+  --main-bg: #f4f5f9;
+  --text-color: #343b50;
+  --text-muted-color: #5f6780;
+  --heading-color: #151b2e;
+  --link-color: #2f3f7a;
+  --link-hover: #1f2a52;
+  --border-color: #e1e4ec;
+
+  --accent: #3b4a8a;
+  --accent-strong: #1f2a52;
+  --accent-soft: rgba(59, 74, 138, 0.09);
+  --accent-text: #2f3f7a;
+  --accent-glow: rgba(59, 74, 138, 0.26);
+  --accent-glow-strong: rgba(59, 74, 138, 0.42);
+  --gold: #8c6a1f;
+  --gold-soft: rgba(201, 162, 74, 0.14);
+  --gradient-accent: linear-gradient(120deg, #1f2a52 0%, #3b4a8a 55%, #8c6a1f 100%);
+  --gradient-stroke: linear-gradient(135deg, #b8c0e8 0%, #7f8bc4 45%, #d9b76a 100%);
+  --gradient-text: linear-gradient(120deg, #1f2a52 0%, #3b4a8a 55%, #8c6a1f 100%);
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(21, 27, 46, 0.08);
+  --halo-1: rgba(160, 172, 230, 0.55);
+  --halo-2: rgba(240, 196, 160, 0.50);
+  --halo-3: rgba(170, 210, 226, 0.48);
+  --lantern-1: rgba(59, 74, 138, 0.13);
+  --lantern-2: rgba(59, 74, 138, 0.05);
+  --star-color: rgba(26, 34, 56, 0.0);
+
+  --card-bg: #ffffff;
+  --card-border-color: #e6e8ef;
+  --card-hover-bg: #f7f8fc;
+  --card-shadow: 0 1px 0 rgba(21, 27, 46, 0.03), 0 6px 16px rgba(21, 27, 46, 0.06), 0 0 0 1px rgba(21, 27, 46, 0.03);
+  --card-shadow-hover: 0 1px 0 rgba(21, 27, 46, 0.05), 0 20px 40px -12px rgba(21, 27, 46, 0.18), 0 0 0 1px rgba(59, 74, 138, 0.14);
+
+  --theme-transition: 420ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  --sidebar-bg: #eceef5;
+  --sidebar-border-color: #dfe2ec;
+  --sidebar-text-color: #4b536b;
+  --sidebar-muted-color: #6a7189;
+  --site-title-color: #151b2e;
+  --site-subtitle-color: #6a7189;
+  --sidebar-active-color: #2f3f7a;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.9);
+  --avatar-border-color: #ffffff;
+  --avatar-bg: #ffffff;
+  --sidebar-btn-bg: #ffffff;
+  --sidebar-btn-color: #4b536b;
+
+  --topbar-bg: rgba(244, 245, 249, 0.86);
+  --topbar-text-color: #151b2e;
+
+  --tag-bg: #ffffff;
+  --tag-border: #e1e4ec;
+  --tag-text: #343b50;
+  --tag-active-bg: #3b4a8a;
+  --tag-active-text: #ffffff;
+
+  --inline-code-bg: rgba(21, 27, 46, 0.06);
+  --code-color: #151b2e;
+  --blockquote-border: #3b4a8a;
+  --blockquote-bg: #f2f3f9;
+  --blockquote-text: #151b2e;
+
+  --status-done-bg: rgba(46, 125, 90, 0.12);
+  --status-done-text: #2e7d5a;
+  --status-wip-bg: rgba(201, 162, 74, 0.18);
+  --status-wip-text: #8c6a1f;
+  --status-todo-bg: rgba(21, 27, 46, 0.06);
+  --status-todo-text: #5f6780;
+
+  color-scheme: light;
+}
+
+// ─── TEMA OSCURO (predeterminado): noche índigo ────────────────────────────
+[data-theme='dark'] {
+  --main-bg: #080b16;
+  --text-color: rgba(238, 234, 224, 0.82);
+  --text-muted-color: rgba(238, 234, 224, 0.62);
+  --heading-color: #f6f1e6;
+  --link-color: var(--warm-gold-300);
+  --link-hover: #fbe8bd;
+  --border-color: rgba(238, 234, 224, 0.10);
+
+  --accent: var(--warm-gold-400);
+  --accent-strong: var(--warm-gold-300);
+  --accent-soft: rgba(230, 192, 121, 0.12);
+  --accent-text: var(--warm-gold-300);
+  --accent-glow: rgba(230, 192, 121, 0.22);
+  --accent-glow-strong: rgba(230, 192, 121, 0.42);
+  --gold: var(--warm-gold-300);
+  --gold-soft: rgba(230, 192, 121, 0.14);
+  --gradient-accent: linear-gradient(120deg, #e6c079 0%, #f0a35e 55%, #d98a7a 100%);
+  --gradient-stroke: linear-gradient(135deg, #f6efe0 0%, #e6c079 40%, #f0a35e 70%, #9aa3d4 100%);
+  --gradient-text: linear-gradient(120deg, #f6efe0 0%, #f0d59a 45%, #f0a35e 100%);
+  --glass-bg: rgba(14, 18, 36, 0.62);
+  --glass-border: rgba(238, 234, 224, 0.09);
+  --halo-1: rgba(230, 192, 121, 0.13);
+  --halo-2: rgba(154, 163, 212, 0.16);
+  --halo-3: rgba(240, 163, 94, 0.08);
+  --star-color: rgba(246, 241, 230, 0.9);
+  --lantern-1: rgba(230, 192, 121, 0.10);
+  --lantern-2: rgba(230, 192, 121, 0.04);
+
+  --card-bg: #0e1224;
+  --card-border-color: rgba(238, 234, 224, 0.08);
+  --card-hover-bg: #141a30;
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.02), 0 8px 22px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --card-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.05), 0 22px 48px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(230, 192, 121, 0.18), 0 0 40px -12px rgba(230, 192, 121, 0.35);
+
+  --sidebar-bg: #0a0d1c;
+  --sidebar-border-color: rgba(238, 234, 224, 0.07);
+  --sidebar-text-color: rgba(238, 234, 224, 0.72);
+  --sidebar-muted-color: rgba(238, 234, 224, 0.5);
+  --site-title-color: #f6f1e6;
+  --site-subtitle-color: rgba(238, 234, 224, 0.58);
+  --sidebar-active-color: var(--warm-gold-300);
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.05);
+  --avatar-border-color: rgba(230, 192, 121, 0.28);
+  --avatar-bg: #0a0d1c;
+  --sidebar-btn-bg: rgba(255, 255, 255, 0.04);
+  --sidebar-btn-color: rgba(238, 234, 224, 0.78);
+
+  --topbar-bg: rgba(8, 11, 22, 0.78);
+  --topbar-text-color: rgba(246, 241, 230, 0.92);
+
+  --tag-bg: rgba(255, 255, 255, 0.05);
+  --tag-border: rgba(255, 255, 255, 0.08);
+  --tag-text: rgba(238, 234, 224, 0.82);
+  --tag-active-bg: var(--warm-gold-400);
+  --tag-active-text: #14100a;
+
+  --inline-code-bg: rgba(255, 255, 255, 0.10);
+  --code-color: #ffffff;
+  --blockquote-border: var(--warm-gold-400);
+  --blockquote-bg: rgba(255, 255, 255, 0.035);
+  --blockquote-text: rgba(246, 241, 230, 0.92);
+
+  --status-done-bg: rgba(126, 200, 160, 0.14);
+  --status-done-text: #9fdcbb;
+  --status-wip-bg: rgba(230, 192, 121, 0.16);
+  --status-wip-text: var(--warm-gold-300);
+  --status-todo-bg: rgba(255, 255, 255, 0.06);
+  --status-todo-text: rgba(238, 234, 224, 0.6);
+
+  color-scheme: dark;
+}
+
+// ─── Referencias: tono rojizo ──────
+:root {
+  --refs-accent: #a4372a;
+  --refs-soft: rgba(164, 55, 42, 0.08);
+  --refs-border: rgba(164, 55, 42, 0.28);
+  --refs-glow: rgba(214, 110, 90, 0.16);
+}
+
+[data-theme='dark'] {
+  --refs-accent: #f28b79;
+  --refs-soft: rgba(242, 139, 121, 0.1);
+  --refs-border: rgba(242, 139, 121, 0.28);
+  --refs-glow: rgba(232, 100, 80, 0.16);
+}
+
+// Alias SCSS de compilación
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxxl: 1650px;
