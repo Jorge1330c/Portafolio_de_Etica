@@ -1,0 +1,29 @@
+---
+import { withBase } from '../lib/paths';
+import { roadmap, STATUS_LABEL } from '../lib/portfolio';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<ol class="roadmap">
+  {roadmap.map((m) => (
+    <li class={`is-${m.status}`}>
+      <span class="roadmap__dot" aria-hidden="true">
+        {m.status === 'done' ? (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        ) : m.status === 'wip' ? (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle></svg>
+        ) : null}
+      </span>
+      <div>
+        <p class="roadmap__title">
+          <strong>{m.code}</strong> · {m.href && m.status !== 'todo' ? <a href={withBase(base, m.href)}>{m.title}</a> : m.title}
+        </p>
+        <p class="roadmap__sub">
+          {m.when}{m.note ? ` · ${m.note}` : ''}
+        </p>
+      </div>
+      <span class="roadmap__meta">{STATUS_LABEL[m.status]}</span>
+    </li>
+  ))}
+</ol>
