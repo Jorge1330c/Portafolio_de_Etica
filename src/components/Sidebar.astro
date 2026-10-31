@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/varios/Universidad_Cientifica_logo.png';
+import { withBase } from '../lib/paths';
+import { COURSE, sections, isEnabled } from '../lib/portfolio';
+
+const enabledById = new Map(sections.map((s) => [s.id, isEnabled(s.status)]));
+const base = import.meta.env.BASE_URL;
+const baseTrim = base.endsWith('/') ? base.slice(0, -1) : base;
+const current = (Astro.url.pathname.replace(/\/+$/, '') || '/').toLowerCase();
+
+function isActive(targetPath: string): boolean {
+  if (!targetPath) {
+    return current === '/' || current === baseTrim.toLowerCase() || current === '';
+  }
+  const target = `${baseTrim}/${targetPath}`.toLowerCase();
+  return current === target || current.startsWith(`${target}/`);
+}
+
+const navItems = [
+  { key: 'home', label: 'Inicio', target: '', icon: 'home' },
+  { key: 'equipo', label: 'Equipo', target: 'equipo', icon: 'users' },
+  { key: 'manifiesto', label: 'Manifiesto', target: 'manifiesto', icon: 'compass' },
+  { key: 'podcast', label: 'Podcast', target: 'podcast', icon: 'mic' },
+  { key: 'videoreaccion', label: 'Video-reacción', target: 'video-reaccion', icon: 'video' },
+  { key: 'infografia', label: 'Infografía', target: 'infografia', icon: 'map' },
+  { key: 'bitacora', label: 'Bitácora', target: 'bitacora', icon: 'list' },
+  { key: 'sobre', label: 'Sobre el curso', target: 'sobre', icon: 'info' }
+].map((item) => ({ ...item, enabled: enabledById.get(item.key) ?? true }));
+---
+
+<aside id="sidebar" aria-label="Navegación principal">
+  <div class="sidebar__profile">
+    <a href={withBase(base, '')} class="sidebar__avatar-link" aria-label={`${COURSE.portfolioName} · Inicio`}>
+      <span class="sidebar__avatar"><Image src={logo} alt={COURSE.university} widths={[176, 220]} sizes="88px" /></span>
+    </a>
+    <a href={withBase(base, '')} class="sidebar__title">Brújula <span class="serif-em">Ética</span></a>
+    <p class="sidebar__subtitle">Portafolio digital · {COURSE.code} · {COURSE.universityShort} · {COURSE.cycle}</p>
+  </div>
+
+  <ul class="sidebar__nav">
+    {navItems.map((item) => (
+      <li class:list={[{ 'is-active': isActive(item.target), 'is-disabled': !item.enabled }]}>
+        <a href={item.enabled ? withBase(base, item.target) : undefined} aria-disabled={item.enabled ? undefined : 'true'} aria-current={isActive(item.target) ? 'page' : undefined} title={item.enabled ? undefined : 'Disponible más adelante'}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            {item.icon === 'home' && (<><path d="M3 11.5L12 4l9 7.5"></path><path d="M5 10v10h14V10"></path></>)}
+            {item.icon === 'users' && (<><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></>)}
+            {item.icon === 'compass' && (<><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></>)}
+            {item.icon === 'mic' && (<><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></>)}
+            {item.icon === 'video' && (<><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></>)}
+            {item.icon === 'map' && (<><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></>)}
+            {item.icon === 'list' && (<><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></>)}
+            {item.icon === 'info' && (<><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></>)}
+          </svg>
+          <span>{item.label}</span>
+          {!item.enabled && (<svg class="sidebar__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>)}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="sidebar__bottom">
+    <button class="sidebar__icon-btn" type="button" data-theme-toggle aria-label="Cambiar tema" title="Cambiar tema (claro/oscuro)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"></path></svg>
+    </button>
+    <button class="sidebar__icon-btn" type="button" data-effects-toggle aria-label="Activar o desactivar efectos" aria-pressed="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"></path></svg>
+    </button>
+    <span class="sidebar__bottom-label">Tema · Efectos</span>
+  </div>
+</aside>
