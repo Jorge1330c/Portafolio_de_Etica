@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { COURSE } from '../lib/portfolio';
+
+const base = import.meta.env.BASE_URL;
+
+const analysis = [
+  {
+    label: 'Vacíos normativos identificados',
+    text: 'Situaciones del dilema que los códigos deontológicos no contemplan adecuadamente. ¿Dónde falló la norma frente a la realidad profesional?'
+  },
+  {
+    label: 'Tensiones ético-legales',
+    text: 'Conflictos entre la obligación legal y la conciencia moral del profesional. ¿Cuándo la ley no alcanza para guiar una decisión justa?'
+  },
+  {
+    label: 'Propuesta de humanización',
+    text: 'Artículos o reformulaciones propuestas que reflejen una ética más humanista y contextualizada al Perú.'
+  },
+  {
+    label: 'Reflexión sobre presión de decisión',
+    text: 'Cómo influye la presión institucional en las decisiones del profesional. Conexión con Weber y Levinas.'
+  }
+];
+---
+
+<BaseLayout
+  title={`Video-reacción crítico · ${COURSE.portfolioName}`}
+  description="Video-reacción crítico al podcast: vacíos éticos, tensiones ético-legales y propuesta de humanización del código deontológico."
+  crumbs={[{ label: 'Video-reacción' }]}
+>
+  <header class="page-header">
+    <p class="page-header__eyebrow">Módulo III · Semanas 9–12</p>
+    <h1 class="page-header__title">Video-reacción <span class="serif-em">crítico</span></h1>
+    <p class="page-header__lead">
+      Revisamos nuestro propio podcast con lo aprendido después: qué vacíos éticos
+      encontramos y qué artículos del código deontológico deberían humanizarse.
+    </p>
+  </header>
+
+  <div class="video-layout reveal">
+    <div class="video-frame-card">
+      <div class="video-frame-card" style="aspect-ratio: 16/9; background: #000; display: flex; align-items: center; justify-content: center;">
+        <video controls style="width: 100%; height: 100%; object-fit: contain;">
+          <source src={`${base.replace(/\/$/, '')}/media/video_reaccion.mp4`} type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+      <div class="video-meta">
+        <p class="video-meta__title">Análisis y propuesta de humanización</p>
+        <p class="video-meta__sub">Video-reacción · Duración: 8–10 min</p>
+      </div>
+    </div>
+
+    <div class="analysis-list">
+      {analysis.map((a) => (
+        <div class="analysis-item">
+          <p class="analysis-item__label">{a.label}</p>
+          <p>{a.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
