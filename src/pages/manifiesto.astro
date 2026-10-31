@@ -1,0 +1,268 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import References from '../components/References.astro';
+import { COURSE, roadmap } from '../lib/portfolio';
+import { team, TEAM_NAME } from '../lib/team';
+import {
+  metaphor,
+  purpose,
+  purposeEssay,
+  concepts,
+  vulnerables,
+  commitment,
+  valuesRank,
+  tension,
+  axiologicalPosition,
+  negligences,
+  socraticQuestion,
+  manifestoClosing
+} from '../lib/manifiesto';
+import faro from '../assets/images/manifiesto/faro-la-punta.jpg';
+import rostros from '../assets/images/manifiesto/mapa-rostros-vulnerables.jpg';
+import piramide from '../assets/images/manifiesto/jerarquia-de-valores.jpg';
+import negligencias from '../assets/images/manifiesto/mapa-negligencias.jpg';
+
+const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
+---
+
+<BaseLayout
+  title={`Manifiesto de Identidad Ética · ${COURSE.portfolioName}`}
+  description={`Manifiesto de Identidad Ética del equipo ${TEAM_NAME}: propósito profesional, poblaciones vulnerables, jerarquía de valores y mapa de negligencias.`}
+  crumbs={[{ label: 'Manifiesto' }]}
+>
+  <div class="manifesto-layout">
+    <aside class="manifesto-side">
+      <p class="eyebrow">Módulo I · Semanas 1–5</p>
+      <h1 class="page-header__title" style="margin: 0 0 12px;">Manifiesto de<br /><span class="serif-em">Identidad Ética</span></h1>
+      <p class="page-header__lead" style="font-size: 14.5px;">
+        Qué nos proponemos como profesionales, a quiénes nos comprometemos a proteger,
+        qué valores priorizamos y qué fallas reconocemos en nuestro propio campo.
+        Reúne los aprendizajes colaborativos AC1 a AC4.
+      </p>
+
+      <p class="eyebrow eyebrow--plain" style="margin-top: 26px;">Jerarquía de valores (Scheler)</p>
+      <ol class="values-rank">
+        {valuesRank.map((v) => (
+          <li>
+            <span class="values-rank__n">{v.n}</span>
+            <span>
+              <span class="values-rank__name">{v.name}</span>
+              <span class="values-rank__type">{v.type}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+
+      <a class="refs-jump" href="#referencias">✦ Referencias del Manifiesto ↓</a>
+    </aside>
+
+    <div class="manifesto-content">
+      <!-- ── AC1 · Metáfora ── -->
+      <article class="metaphor reveal" id="metafora">
+        <div class="metaphor__media">
+          <Image
+            src={faro}
+            alt="Faro de La Punta iluminando la noche y guiando embarcaciones hacia el puerto"
+            widths={[720, 1080, 1440]}
+            sizes="(min-width: 1200px) 860px, 92vw"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="metaphor__label">
+            <span class="metaphor__label-eyebrow">✦ Nuestra metáfora artística</span>
+            <p class="metaphor__label-title">{metaphor.title}</p>
+            <p class="metaphor__label-sub">{metaphor.place}</p>
+          </div>
+        </div>
+        <div class="metaphor__body">
+          <blockquote class="metaphor__quote">“{metaphor.quote}”</blockquote>
+          <div>
+            <p class="metaphor__text">{metaphor.description}</p>
+            <p style="text-align:center; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--accent-text); margin-top: 16px;">
+              «{metaphor.tagline}»
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── AC1 · Propósito ── -->
+      <section class="mblock reveal" id="proposito">
+        <h2 class="mblock__title">Propósito profesional <span class="mblock__week">AC1 · Semana 1</span></h2>
+        {purposeEssay.map((par) => <p>{par}</p>)}
+        <div class="callout callout--serif">
+          <p class="callout__label">Así lo escribimos en la primera sesión</p>
+          <p>{purpose.team}</p>
+        </div>
+        <div class="callout">
+          <p class="callout__label">Propósito de la carrera</p>
+          <p style="margin:0;">{purpose.career}</p>
+        </div>
+        <div class="concept-grid">
+          {concepts.map((c) => (
+            <article class="concept-card">
+              <p class="concept-card__greek">{c.greek}</p>
+              <p class="concept-card__name">{c.name}</p>
+              <p>{c.text}</p>
+            </article>
+          ))}
+        </div>
+        <a class="refs-jump" href="#referencias-ac1">Referencias de AC1 ↓</a>
+      </section>
+
+      <!-- ── AC2 · Poblaciones vulnerables ── -->
+      <section class="mblock reveal" id="poblaciones">
+        <h2 class="mblock__title">Poblaciones vulnerables que protegemos <span class="mblock__week">AC2 · Semana 2</span></h2>
+        <div class="vuln-tags">
+          {vulnerables.map((v) => (
+            <span class="vuln-tag">{v.short} <span>{v.principle}</span></span>
+          ))}
+        </div>
+        <p>
+          Un propósito que no nombra a nadie es una frase. Para darle peso al nuestro,
+          respondimos a quién le debemos responsabilidad: quiénes tienen menos poder, menos
+          recursos o menos voz frente a los sistemas que diseñamos. Partimos de la persona como
+          fin en sí misma, nunca solo como medio (Kant, 1785/2012), y de los derechos humanos
+          como piso mínimo (Organización de las Naciones Unidas [ONU], 1948).
+        </p>
+        <div class="vuln-table">
+          {vulnerables.map((v) => (
+            <article class="vuln-row">
+              <div>
+                <p class="vuln-row__head">Población</p>
+                <p class="vuln-row__who">{v.who}</p>
+              </div>
+              <div>
+                <p class="vuln-row__head">¿Por qué es vulnerable?</p>
+                <p class="vuln-row__why">{v.why}</p>
+              </div>
+              <div>
+                <p class="vuln-row__head">Principio en juego</p>
+                <p class="vuln-row__principle">⚖ {v.principle}</p>
+                <p class="vuln-row__note">{v.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <figure class="figure-card">
+          <Image
+            src={rostros}
+            alt="Mapa de rostros vulnerables en nuestro contexto profesional"
+            widths={[640, 900, 1200]}
+            sizes="(min-width: 1200px) 860px, 92vw"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Mapa de rostros vulnerables en nuestro contexto profesional (AC2).</figcaption>
+        </figure>
+        <div class="callout callout--serif">
+          <p class="callout__label">Nuestro compromiso ético</p>
+          <p>{commitment}</p>
+        </div>
+        <a class="refs-jump" href="#referencias-ac2">Referencias de AC2 ↓</a>
+      </section>
+
+      <!-- ── AC3 · Jerarquía de valores ── -->
+      <section class="mblock reveal" id="valores">
+        <h2 class="mblock__title">Nuestra jerarquía de valores <span class="mblock__week">AC3 · Semana 3</span></h2>
+        <p>
+          Con el propósito declarado y las personas a quienes protegemos nombradas, dijimos
+          desde qué valores decidimos cuando esos compromisos chocan entre sí. Con la tabla
+          axiológica de Max Scheler (1913–1916) examinamos cómo opera realmente nuestra carrera
+          en el Perú, no cómo nos gustaría que operara, y distinguimos en especial lo vital de lo
+          económico.
+        </p>
+        <figure class="figure-card">
+          <Image
+            src={piramide}
+            alt="Pirámide con nuestra jerarquía de valores: espirituales, vitales, económicos, de lo agradable y de lo sagrado"
+            widths={[640, 900, 1200]}
+            sizes="(min-width: 1200px) 860px, 92vw"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Jerarquía de valores que priorizamos en nuestro ejercicio profesional (AC3). «La eficiencia económica debe estar al servicio de las personas».</figcaption>
+        </figure>
+
+        <div class="callout" style="margin-top: 22px;">
+          <p class="callout__label">Tensión axiológica principal</p>
+          <p style="margin:0;">{tension}</p>
+        </div>
+
+        <div class="callout callout--serif">
+          <p class="callout__label">Declaración de posición axiológica</p>
+          <p>{axiologicalPosition}</p>
+        </div>
+        <a class="refs-jump" href="#referencias-ac3">Referencias de AC3 ↓</a>
+      </section>
+
+      <!-- ── AC4 · Mapa de negligencias y acciones positivas ── -->
+      <section class="mblock reveal" id="mapa-critico">
+        <h2 class="mblock__title">Luces y sombras de nuestra profesión <span class="mblock__week">AC4 · Semana 4</span></h2>
+        <p>
+          Un manifiesto que solo enumera aspiraciones se queda en lo aspiracional. Por eso
+          miramos con honestidad intelectual nuestro propio campo en el Perú: identificamos tres
+          fallas éticas reales, nombramos la falacia o distorsión de la verdad que permite que
+          persistan y las conectamos con las poblaciones vulnerables del AC2.
+        </p>
+        <div class="vuln-table">
+          {negligences.map((n) => (
+            <article class="vuln-row vuln-row--quad">
+              <div>
+                <p class="vuln-row__head">Negligencia</p>
+                <p class="vuln-row__who">{n.short}</p>
+                <p class="vuln-row__why">{n.failure}</p>
+              </div>
+              <div>
+                <p class="vuln-row__head">Falacia que la sostiene</p>
+                <p class="vuln-row__principle">{n.fallacy}</p>
+                <p class="vuln-row__note">{n.reasoning}</p>
+              </div>
+              <div>
+                <p class="vuln-row__head">Población afectada (AC2)</p>
+                <p class="vuln-row__who">{n.population}</p>
+                <p class="vuln-row__why">{n.impact}</p>
+              </div>
+              <div>
+                <p class="vuln-row__head">Acción positiva</p>
+                <p class="vuln-row__why">{n.action}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <figure class="figure-card">
+          <Image
+            src={negligencias}
+            alt="Infografía «Ingeniería de Sistemas: entre luces y sombras éticas»"
+            widths={[640, 978]}
+            sizes="(min-width: 1200px) 860px, 92vw"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Mapa de negligencias éticas y acciones positivas en el Perú (AC4).</figcaption>
+        </figure>
+        <div class="callout">
+          <p class="callout__label">Nuestra pregunta socrática</p>
+          <p style="margin:0;">{socraticQuestion}</p>
+        </div>
+        <div class="callout callout--serif">
+          <p class="callout__label">Cierre del Manifiesto</p>
+          <p>{manifestoClosing}</p>
+        </div>
+        <a class="refs-jump" href="#referencias-ac4">Referencias de AC4 ↓</a>
+      </section>
+
+      <!-- ── Referencias de todo el Manifiesto (AC1–AC4) ── -->
+      <section class="refs-panel reveal" id="referencias" aria-labelledby="referencias-title">
+        <p class="refs-panel__eyebrow">✦ Bibliografía</p>
+        <h2 class="refs-panel__title" id="referencias-title">Referencias</h2>
+        <p class="refs-panel__lead">
+          Las fuentes en que nos apoyamos en cada aprendizaje colaborativo del Manifiesto, en formato APA 7.
+        </p>
+        <div class="refs-groups">
+          {manifestoACs.map((m) => <References code={m.code} label={m.title} />)}
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
