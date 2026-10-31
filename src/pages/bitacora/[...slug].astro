@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import EntryLayout from '../../layouts/EntryLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('bitacora');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<EntryLayout
+  number={entry.data.number}
+  title={entry.data.title}
+  topic={entry.data.topic}
+  date={entry.data.date}
+  section={entry.data.section}
+  authors={entry.data.authors}
+  tags={entry.data.tags}
+  surface={entry.data.surface}
+  cover={entry.data.cover}
+  gallery={entry.data.gallery}
+  music={entry.data.music}
+>
+  <Content />
+</EntryLayout>
