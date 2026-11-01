@@ -4,8 +4,9 @@ import { COURSE } from '../lib/portfolio';
 import { CAREER } from '../lib/team';
 
 const base = import.meta.env.BASE_URL;
-// Usamos el enlace de descarga directa de Google Drive
-const driveAudioUrl = 'https://docs.google.com/uc?export=download&id=1V2XRQGDXx3ugeN77WNRtM2zDfVplUcaC';
+const driveVideoId = '1V2XRQGDXx3ugeN77WNRtM2zDfVplUcaC';
+// Enlace de descarga directa (suele ser bloqueado por Drive)
+const driveAudioUrl = `https://drive.google.com/uc?export=download&id=${driveVideoId}`;
 ---
 
 <BaseLayout
@@ -24,6 +25,7 @@ const driveAudioUrl = 'https://docs.google.com/uc?export=download&id=1V2XRQGDXx3
 
   <div class="podcast-layout reveal">
     <div class="podcast-player">
+      <!-- Cabecera del podcast -->
       <div class="podcast-cover">
         <span class="podcast-cover__icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <div>
@@ -31,21 +33,23 @@ const driveAudioUrl = 'https://docs.google.com/uc?export=download&id=1V2XRQGDXx3
           <p class="podcast-cover__title">El dilema ético en la Ingeniería de Sistemas</p>
         </div>
       </div>
+      
+      <!-- Controles y Reproductor -->
       <div class="podcast-controls">
         
-        <!-- Reproductor de Audio Nativo (Diseño solo audio) -->
-        <div style="background: var(--card-bg); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--card-border-color); box-shadow: var(--card-shadow); margin-bottom: 16px;">
-          <p style="font-size: 13px; font-weight: 600; color: var(--text-muted-color); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.1em;">
-            🎧 Escuchar Episodio
+        <!-- Reproductor de Audio Nativo -->
+        <div style="background: var(--card-hover-bg); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--card-border-color);">
+          <p style="margin: 0 0 12px 0; font-size: 13px; font-weight: 600; color: var(--text-muted-color); text-transform: uppercase; letter-spacing: 0.1em;">
+            Escuchar episodio
           </p>
-          <audio controls style="width: 100%; border-radius: 8px; outline: none;">
+          <audio controls style="width: 100%; outline: none;">
             <source src={driveAudioUrl} type="audio/mpeg">
-            <source src={driveAudioUrl} type="audio/mp4">
-            Tu navegador no soporta el elemento de audio.
+            <!-- Si el navegador bloquea la conexión con Drive, mostrará esto -->
+            Tu navegador no puede reproducir el audio. Es posible que Google Drive haya bloqueado la conexión directa.
           </audio>
         </div>
 
-        <div class="podcast-tags">
+        <div class="podcast-tags" style="margin-top: 16px;">
           <span class="podcast-tag">Kant · Ética del deber</span>
           <span class="podcast-tag">Mill · Utilitarismo</span>
           <span class="podcast-tag">{CAREER}</span>
