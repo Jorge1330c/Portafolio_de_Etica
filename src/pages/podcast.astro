@@ -4,9 +4,6 @@ import { COURSE } from '../lib/portfolio';
 import { CAREER } from '../lib/team';
 
 const base = import.meta.env.BASE_URL;
-const driveVideoId = '1V2XRQGDXx3ugeN77WNRtM2zDfVplUcaC';
-// Enlace de descarga directa (suele ser bloqueado por Drive)
-const driveAudioUrl = `https://drive.google.com/uc?export=download&id=${driveVideoId}`;
 ---
 
 <BaseLayout
@@ -37,15 +34,15 @@ const driveAudioUrl = `https://drive.google.com/uc?export=download&id=${driveVid
       <!-- Controles y Reproductor -->
       <div class="podcast-controls">
         
-        <!-- Reproductor de Audio Nativo -->
+        <!-- Reproductor de Audio Nativo (Archivo local) -->
         <div style="background: var(--card-hover-bg); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--card-border-color);">
           <p style="margin: 0 0 12px 0; font-size: 13px; font-weight: 600; color: var(--text-muted-color); text-transform: uppercase; letter-spacing: 0.1em;">
             Escuchar episodio
           </p>
           <audio controls style="width: 100%; outline: none;">
-            <source src={driveAudioUrl} type="audio/mpeg">
-            <!-- Si el navegador bloquea la conexión con Drive, mostrará esto -->
-            Tu navegador no puede reproducir el audio. Es posible que Google Drive haya bloqueado la conexión directa.
+            <!-- Ruta al archivo mp3 en la carpeta public/media/ -->
+            <source src={`${base.replace(/\/$/, '')}/media/podcast_etica.mp3`} type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
           </audio>
         </div>
 
