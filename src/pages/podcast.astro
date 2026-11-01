@@ -4,6 +4,8 @@ import { COURSE } from '../lib/portfolio';
 import { CAREER } from '../lib/team';
 
 const base = import.meta.env.BASE_URL;
+// ID del video de Google Drive extraído de tu enlace
+const driveVideoId = '1V2XRQGDXx3ugeN77WNRtM2zDfVplUcaC';
 ---
 
 <BaseLayout
@@ -29,13 +31,21 @@ const base = import.meta.env.BASE_URL;
           <p class="podcast-cover__title">El dilema ético en la Ingeniería de Sistemas</p>
         </div>
       </div>
-        <div style="background: var(--card-bg); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--card-border-color); display: flex; justify-content: center;">
-          <video controls style="width: 100%; border-radius: var(--radius-sm);">
-            <source src={`${base.replace(/\/$/, '')}/media/podcast_etica.mp4`} type="video/mp4">
-            Tu navegador no soporta el elemento de video.
-          </video>
+      <div class="podcast-controls">
+        
+        <!-- Reproductor de Google Drive -->
+        <div style="aspect-ratio: 16/9; width: 100%; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--card-border-color); background: #000;">
+          <iframe 
+            src={`https://drive.google.com/file/d/${driveVideoId}/preview`} 
+            width="100%" 
+            height="100%" 
+            allow="autoplay; fullscreen"
+            style="border: 0;"
+            title="Podcast Ética - Sinergia Sistémica"
+          ></iframe>
         </div>
-        <div class="podcast-tags">
+
+        <div class="podcast-tags" style="margin-top: 16px;">
           <span class="podcast-tag">Kant · Ética del deber</span>
           <span class="podcast-tag">Mill · Utilitarismo</span>
           <span class="podcast-tag">{CAREER}</span>
