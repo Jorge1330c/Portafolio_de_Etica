@@ -1,5 +1,2 @@
 User-agent: *
 Allow: /
-Disallow: /tags/
-
-Sitemap: https://angel5002.github.io/Portafolio-Digital/sitemap-index.xml
