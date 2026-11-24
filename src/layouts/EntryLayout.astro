@@ -53,7 +53,9 @@ const crumbs = [{ label: 'Bitácora', href: withBase(base, 'bitacora') }, { labe
 
     {music && <Music spotify={music.spotify} youtube={music.youtube} title={music.title} note={music.note} />}
 
-    <div class="prose"><slot /></div>
+    <div class="prose"><slot />
+      {number !== 'AC1' && <p><a href={withBase(base, 'bitacora/ac1-metafora-artistica')}>Volver al fundamento del portafolio: AC1 · El Faro de La Punta</a></p>}
+    </div>
 
     {gallery && gallery.length > 0 && <Gallery items={gallery} heading="Material visual de la sesión" />}
 
