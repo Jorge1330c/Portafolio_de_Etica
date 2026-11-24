@@ -9,13 +9,13 @@ const entries = (await getCollection('bitacora')).sort((a, b) => a.data.order - 
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={`Bitácora · ${COURSE.portfolioName}`} description="Archivo de todos los aprendizajes colaborativos publicados." crumbs={[{ label: 'Bitácora' }]}>
+<BaseLayout title={`Bitácora · ${COURSE.portfolioName}`} description="Archivo de todas las entradas publicadas." crumbs={[{ label: 'Bitácora' }]}>
   <header class="page-header">
     <p class="page-header__eyebrow">Archivo</p>
     <h1 class="page-header__title">Bitácora <span class="serif-em">semanal</span></h1>
     <p class="page-header__lead">
-      {entries.length} {entries.length === 1 ? 'aprendizaje colaborativo publicado' : 'aprendizajes colaborativos publicados'} hasta hoy,
-      en orden cronológico. Cada entrada corresponde a una ficha trabajada en clase.
+      {entries.length} {entries.length === 1 ? 'entrada publicada' : 'entradas publicadas'} hasta hoy,
+      en orden cronológico. Desde la metáfora del faro en AC1 hasta el compromiso final de EC3, cada actividad desarrolla nuestro propósito en Ingeniería Empresarial y de Sistemas.
     </p>
   </header>
 
