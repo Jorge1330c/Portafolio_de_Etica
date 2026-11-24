@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Roadmap from '../components/Roadmap.astro';
-import campus from '../assets/images/varios/Universidad_Cientifica_img_1.png';
+import campus from '../assets/images/varios/Universidad_Cientifica_img_1.webp';
 import { COURSE } from '../lib/portfolio';
 import { TEAM_NAME, CAREER } from '../lib/team';
 
@@ -17,15 +17,16 @@ const meta = [
 
 const modules = [
   { n: 'Módulo I', title: 'Aspectos básicos de la ética', body: 'Telos, areté y eudaimonía (Aristóteles); dignidad y bioética; jerarquía de valores de Scheler. Producto: Manifiesto de Identidad Ética.' },
-  { n: 'Módulo II', title: 'Teorías éticas en tensión', body: 'El deber kantiano frente al utilitarismo de Mill aplicados a un dilema real del contexto peruano. Producto: podcast.' },
-  { n: 'Módulo III', title: 'Deontología y presión de decisión', body: 'Vacíos normativos, tensiones ético-legales, Weber y Levinas. Producto: video-reacción crítico a nuestro propio podcast.' },
-  { n: 'Módulo IV', title: 'Integridad y sostenibilidad', body: 'Ética del cuidado y ecoética: responsabilidad con la población vulnerable y con las generaciones futuras. Producto: infografía.' }
+  { n: 'Módulo II', title: 'Teorías éticas en tensión', body: 'El deber kantiano frente al utilitarismo de Mill: análisis de decisiones profesionales orientadas por el propósito de AC1. Producto: podcast.' },
+  { n: 'Módulo III', title: 'Deontología y presión de decisión', body: 'Contrato social, normas, códigos deontológicos y responsabilidad por consecuencias (Weber). Producto: video-reacción crítico a nuestro propio podcast.' },
+  { n: 'Módulo IV', title: 'Integridad y sostenibilidad', body: 'Ética del cuidado (Levinas, Gilligan y Noddings) y ecoética (Jonas y Leff): el bien común del AC1 se extiende a la población vulnerable y a las generaciones futuras. Producto: infografía.' }
 ];
 
 const evals = [
   ['EC1', 'Manifiesto de Identidad Ética', 'Semana 5', '18 %'],
-  ['EC2', 'Sustentación del portafolio', 'Semana 12', '—'],
-  ['EC3', 'Sustentación final del portafolio', 'Semana 15', '—']
+  ['EP', 'Evaluación parcial individual: módulos I y II', 'Semana 8', 'No indicado'],
+  ['EC2', 'Video-reacción y sustentación', 'Semana 12', '18 %'],
+  ['EC3', 'Sustentación final del portafolio', 'Semana 15', '19 %']
 ];
 ---
 

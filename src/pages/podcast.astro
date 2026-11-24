@@ -1,25 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { COURSE } from '../lib/portfolio';
+import References from '../components/References.astro';
+import { withBase } from '../lib/paths';
 import { CAREER } from '../lib/team';
 
 // Astro inyecta automáticamente /Portafolio_de_Etica/ aquí
 const base = import.meta.env.BASE_URL;
 // Construimos la ruta absoluta de forma segura
-const audioSrc = `${base}media/podcast_etica.mp3`.replace(/([^:]\/)\/+/g, "$1");
+const audioSrc = withBase(base, 'media/podcast_etica.mp3');
 ---
 
 <BaseLayout
   title={`Podcast de Dilema Moral · ${COURSE.portfolioName}`}
-  description="Un caso real del contexto peruano analizado desde dos marcos filosóficos contrapuestos: el deber kantiano y el utilitarismo de Mill."
+  description="Podcast original y guía de análisis de un dilema profesional desde Kant y Mill, vinculada al propósito de AC1."
   crumbs={[{ label: 'Podcast' }]}
 >
   <header class="page-header">
     <p class="page-header__eyebrow">Módulo II · Semanas 6–7</p>
     <h1 class="page-header__title">Podcast de <span class="serif-em">Dilema Moral</span></h1>
     <p class="page-header__lead">
-      Un caso real del contexto peruano analizado desde dos marcos contrapuestos:
-      el deber kantiano y el utilitarismo de Mill.
+      El faro de AC1 orienta nuestras decisiones ante los dilemas de la Ingeniería Empresarial y de Sistemas. La guía de apoyo contrasta el deber kantiano con el utilitarismo de Mill.
     </p>
   </header>
 
@@ -30,7 +31,7 @@ const audioSrc = `${base}media/podcast_etica.mp3`.replace(/([^:]\/)\/+/g, "$1");
         <span class="podcast-cover__icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <div>
           <p class="podcast-cover__ep">Episodio 01 · Dilema ético profesional</p>
-          <p class="podcast-cover__title">El dilema ético en la Ingeniería de Sistemas</p>
+          <p class="podcast-cover__title">El dilema ético en la Ingeniería Empresarial y de Sistemas</p>
         </div>
       </div>
       
@@ -65,9 +66,9 @@ const audioSrc = `${base}media/podcast_etica.mp3`.replace(/([^:]\/)\/+/g, "$1");
 
     <div class="podcast-info">
       <div class="dilemma">
-        <p class="dilemma__label">El dilema analizado</p>
+        <p class="dilemma__label">Dilema propuesto para el análisis</p>
         <p class="dilemma__text">
-          “Aquí enunciaremos el dilema ético real vinculado a nuestro campo profesional que se discute en el podcast.”
+          ¿Cómo equilibrar la eficiencia de los sistemas digitales con el acceso digno a servicios públicos de salud de los adultos mayores en pobreza?
         </p>
       </div>
 
@@ -75,13 +76,15 @@ const audioSrc = `${base}media/podcast_etica.mp3`.replace(/([^:]\/)\/+/g, "$1");
       <div class="theory-compare">
         <article class="theory-card">
           <h5><span>K</span> Perspectiva kantiana</h5>
-          <p>¿Qué haría el profesional si actuara por principio universal, no por conveniencia?</p>
+          <p>Desde Kant, no podemos convertir a las personas en medios para alcanzar indicadores. El deber exige una máxima universalizable y respeto por su autonomía, aun bajo presión empresarial.</p>
         </article>
         <article class="theory-card">
           <h5><span>M</span> Perspectiva utilitarista</h5>
-          <p>¿Qué acción produce el mayor bien para el mayor número de personas afectadas?</p>
+          <p>Desde Mill, debemos considerar el bienestar de todos, incluyendo el daño que sufren quienes quedan excluidos. Evaluamos tiempo, acceso, calidad de atención y confianza, no solo costos.</p>
         </article>
       </div>
     </div>
   </div>
+  <section class="info-section prose"><h2>Guía de análisis · AC5 y AC6</h2><p>El telos de AC1 define el bien común como fin de la profesión. Kant aporta el límite de la dignidad y Mill permite valorar las consecuencias sobre el bienestar de todos. El caso propuesto aplica estos criterios a procesos de atención y sistemas digitales de salud, con especial atención a la población priorizada en AC10.</p><p>El dilema anterior es una aplicación temática propuesta a partir de la ficha AC10 y las sesiones 6–7; no constituye una transcripción verificada del episodio. La grabación original se conserva íntegra (5 min 14 s).</p><p>Proponemos mantener alternativas de atención asistida, accesibilidad y pruebas con usuarios reales. La decisión debe poder justificarse tanto por el deber de respetar la dignidad como por sus consecuencias sobre todos los afectados.</p><p><a href={withBase(base,'bitacora/ac5-deber-moral')}>AC5 · Deber y autonomía</a> · <a href={withBase(base,'bitacora/ac6-utilitarismo')}>AC6 · Utilitarismo y bien común</a></p></section>
+<References code="AC5"/><References code="AC6"/>
 </BaseLayout>

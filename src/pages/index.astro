@@ -8,7 +8,8 @@ import Roadmap from '../components/Roadmap.astro';
 import { withBase } from '../lib/paths';
 import { COURSE, sections, progress } from '../lib/portfolio';
 import { TEAM_NAME, CAREER, team } from '../lib/team';
-import faro from '../assets/images/manifiesto/Etica_S1.jpeg';
+import { metaphor } from '../lib/manifiesto';
+import faro from '../assets/images/manifiesto/Etica_S1.webp';
 
 const entries = (await getCollection('bitacora')).sort(
   (a, b) => a.data.order - b.data.order
@@ -28,7 +29,7 @@ const prog = progress();
         Portafolio digital de identidad ética profesional
         <br />
         <span style="font-size: 0.85em; font-style: italic; color: var(--accent-text);">
-          De la incertidumbre de los datos… hacia decisiones seguras.
+          {metaphor.tagline}
         </span>
       </p>
 
@@ -37,7 +38,7 @@ const prog = progress();
       <p class="hero__desc">
         Aquí reunimos el trabajo del equipo durante el curso: el Manifiesto de
         Identidad Ética, el podcast sobre un dilema profesional, el video-reacción
-        y la infografía final.
+        y la infografía final. El Faro de La Punta (AC1) orienta todo el recorrido: nuestro telos es el bien común, nuestra excelencia se construye con prácticas éticas y nuestro compromiso se extiende a las generaciones futuras.
       </p>
 
       <dl class="hero__meta">
@@ -113,7 +114,7 @@ const prog = progress();
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
             <span data-count={prog.done}>{prog.done}</span>
           </span>
-          <span class="opal-pill__label">AC listos</span>
+          <span class="opal-pill__label">Hitos listos</span>
         </a>
         <a class="opal-pill" href={withBase(base, 'sobre')}>
           <span class="opal-pill__value">
@@ -138,7 +139,7 @@ const prog = progress();
       <p class="eyebrow">Estructura del portafolio</p>
       <h2 id="secciones-title" class="sec-head__title">Las cinco <span class="serif-em">secciones</span></h2>
       <p class="sec-head__lead">
-        Siguen el orden de los cuatro módulos del curso, el mismo en que construimos el portafolio.
+        Siguen el recorrido de AC1: identidad y valores, decisiones morales, responsabilidad profesional, cuidado y sostenibilidad. El puerto seguro es el bien común.
       </p>
     </div>
     <div class="section-grid reveal-stagger">
@@ -151,8 +152,7 @@ const prog = progress();
       <p class="eyebrow">Bitácora</p>
       <h2 id="bitacora-title" class="sec-head__title">Trabajo por <span class="serif-em">sesión</span></h2>
       <p class="sec-head__lead">
-        Una entrada por aprendizaje colaborativo, con lo que produjimos en clase
-        y, cuando la hubo, la canción que nos acompañó esa sesión.
+        Actividades colaborativas AC1–AC11, reflexiones y preparación de las evaluaciones.
       </p>
     </div>
     <div id="post-list" class="reveal-stagger" data-tilt-group>

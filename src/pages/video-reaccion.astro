@@ -1,25 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import References from '../components/References.astro';
+import { withBase } from '../lib/paths';
 import { COURSE } from '../lib/portfolio';
 
 const base = import.meta.env.BASE_URL;
 
 const analysis = [
   {
-    label: 'Vacíos normativos identificados',
-    text: 'Situaciones del dilema que los códigos deontológicos no contemplan adecuadamente. ¿Dónde falló la norma frente a la realidad profesional?'
+    label: 'Aspectos a examinar en las normas',
+    text: 'Proponemos complementar los deberes generales con criterios operativos de accesibilidad, auditoría de decisiones, protección de datos y canales de atención alternativos.'
   },
   {
     label: 'Tensiones ético-legales',
-    text: 'Conflictos entre la obligación legal y la conciencia moral del profesional. ¿Cuándo la ley no alcanza para guiar una decisión justa?'
+    text: 'Cumplir una especificación no garantiza justicia si su diseño excluye a personas vulnerables. Debemos documentar y comunicar riesgos, distinguiendo obligación legal, norma social y deber moral.'
   },
   {
     label: 'Propuesta de humanización',
-    text: 'Artículos o reformulaciones propuestas que reflejen una ética más humanista y contextualizada al Perú.'
+    text: 'Proponemos incluir pruebas con usuarios vulnerables, alternativas de atención, revisión humana y escalamiento de incidentes. Son propuestas, no artículos vigentes del código.'
   },
   {
     label: 'Reflexión sobre presión de decisión',
-    text: 'Cómo influye la presión institucional en las decisiones del profesional. Conexión con Weber y Levinas.'
+    text: 'Desde Weber, las buenas intenciones no eximen de responder por consecuencias previsibles. Desde Levinas, la persona afectada debe estar presente en el proceso de decisión.'
   }
 ];
 ---
@@ -33,8 +35,7 @@ const analysis = [
     <p class="page-header__eyebrow">Módulo III · Semanas 9–12</p>
     <h1 class="page-header__title">Video-reacción <span class="serif-em">crítico</span></h1>
     <p class="page-header__lead">
-      Revisamos nuestro propio podcast con lo aprendido después: qué vacíos éticos
-      encontramos y qué artículos del código deontológico deberían humanizarse.
+      A partir del propósito de AC1, la guía de revisión examina cómo las normas, los códigos deontológicos y la responsabilidad por consecuencias orientan la práctica profesional.
     </p>
   </header>
 
@@ -48,7 +49,7 @@ const analysis = [
       </div>
       <div class="video-meta">
         <p class="video-meta__title">Análisis y propuesta de humanización</p>
-        <p class="video-meta__sub">Video-reacción · Duración: 8–10 min</p>
+        <p class="video-meta__sub">Video-reacción · Duración: 9 min 13 s</p>
       </div>
     </div>
 
@@ -61,4 +62,6 @@ const analysis = [
       ))}
     </div>
   </div>
+<section class="info-section prose"><h2>Fundamento de la revisión</h2><p>AC7 examina la confianza social necesaria para orientar decisiones; AC8 convierte el areté de AC1 en hábitos de transparencia, competencia y advertencia de riesgos; AC9, desde Weber, exige responder por las consecuencias previsibles. La luz del faro no basta si no comprobamos que las personas pueden llegar a puerto.</p><p>La síntesis de apoyo aplica las sesiones 9–11 al tema de vulnerabilidad de AC10. No se presenta como transcripción del video original.</p><p><a href={withBase(base,'bitacora/ac7-contrato-social')}>AC7 · Contrato social</a> · <a href={withBase(base,'bitacora/ac8-codigos-deontologicos')}>AC8 · Códigos deontológicos</a> · <a href={withBase(base,'bitacora/ac9-responsabilidad-profesional')}>AC9 · Responsabilidad</a></p><p>EC2: presentación grupal, 15–20 minutos, 18 % de la nota final. <a href={withBase(base,'bitacora/ec2-video-reaccion')}>Guía de sustentación.</a></p></section>
+<References code="AC7"/><References code="AC8"/><References code="AC9"/>
 </BaseLayout>

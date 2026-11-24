@@ -10,6 +10,7 @@ import {
   purposeEssay,
   concepts,
   vulnerables,
+  priorityPopulation,
   commitment,
   valuesRank,
   tension,
@@ -18,8 +19,8 @@ import {
   socraticQuestion,
   manifestoClosing
 } from '../lib/manifiesto';
-import faro from '../assets/images/manifiesto/Etica_S1.jpeg';
-import negligencias from '../assets/images/manifiesto/Etica_S4.png';
+import faro from '../assets/images/manifiesto/Etica_S1.webp';
+import negligencias from '../assets/images/manifiesto/Etica_S4.webp';
 
 const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
 ---
@@ -39,7 +40,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
         Reúne los aprendizajes colaborativos AC1 a AC4.
       </p>
 
-      <p class="eyebrow eyebrow--plain" style="margin-top: 26px;">Jerarquía de valores (Scheler)</p>
+      <p class="eyebrow eyebrow--plain" style="margin-top: 26px;">Nuestra jerarquía de valores</p>
       <ol class="values-rank">
         {valuesRank.map((v) => (
           <li>
@@ -77,6 +78,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
           <blockquote class="metaphor__quote">“{metaphor.quote}”</blockquote>
           <div>
             <p class="metaphor__text">{metaphor.description}</p>
+            <p class="figure__credit">Referencia conceptual: {metaphor.reference} Ilustración aportada al portafolio; autor no consignado.</p>
             <p style="text-align:center; font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--accent-text); margin-top: 16px;">
               «{metaphor.tagline}»
             </p>
@@ -93,7 +95,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
           <p>{purpose.team}</p>
         </div>
         <div class="callout">
-          <p class="callout__label">Propósito de la carrera</p>
+          <p class="callout__label">Propósito de la carrera · Ingeniería Empresarial y de Sistemas</p>
           <p style="margin:0;">{purpose.career}</p>
         </div>
         <div class="concept-grid">
@@ -105,6 +107,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
             </article>
           ))}
         </div>
+        <p>Siguiendo a Giusti (2007), la ética pregunta cómo vivir bien con otros. El faro expresa esa dimensión relacional: la excelencia técnica y la gestión empresarial tienen sentido cuando orientan a las personas y organizaciones hacia el bien común.</p>
         <a class="refs-jump" href="#referencias-ac1">Referencias de AC1 ↓</a>
       </section>
 
@@ -159,6 +162,13 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
           <p class="callout__label">Nuestro compromiso ético</p>
           <p>{commitment}</p>
         </div>
+        <div class="callout">
+          <p class="callout__label">Ampliación de AC2 · Población priorizada en AC10 y AC11</p>
+          <p><strong>{priorityPopulation.who}</strong></p>
+          <p>{priorityPopulation.why}</p>
+          <p><strong>{priorityPopulation.principle}:</strong> {priorityPopulation.note}</p>
+          <p>La ampliación procede de las fichas AC10 y AC11; conserva las poblaciones originalmente identificadas en AC2. El faro de AC1 debe orientar también a quienes encuentran más barreras.</p>
+        </div>
         <a class="refs-jump" href="#referencias-ac2">Referencias de AC2 ↓</a>
       </section>
 
@@ -168,7 +178,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
         <p>
           Con el propósito declarado y las personas a quienes protegemos nombradas, dijimos
           desde qué valores decidimos cuando esos compromisos chocan entre sí. Con la tabla
-          axiológica de Max Scheler (1913–1916) examinamos cómo opera realmente nuestra carrera
+          axiológica de Max Scheler (1913–1916) como referencia, construimos nuestra propia jerarquía (no una reproducción literal de su clasificación) y examinamos cómo opera realmente nuestra carrera
           en el Perú, no cómo nos gustaría que operara, y distinguimos en especial lo vital de lo
           económico.
         </p>
@@ -195,6 +205,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
           <p class="callout__label">Declaración de posición axiológica</p>
           <p>{axiologicalPosition}</p>
         </div>
+        <p>El telos de AC1 fija el bien común como destino: los valores espirituales y vitales orientan la eficiencia económica, y el areté se cultiva al defenderlos en cada decisión.</p>
         <a class="refs-jump" href="#referencias-ac3">Referencias de AC3 ↓</a>
       </section>
 
@@ -205,7 +216,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
           Un manifiesto que solo enumera aspiraciones se queda en lo aspiracional. Por eso
           miramos con honestidad intelectual nuestro propio campo en el Perú: identificamos tres
           fallas éticas reales, nombramos la falacia o distorsión de la verdad que permite que
-          persistan y las conectamos con las poblaciones vulnerables del AC2.
+          persistan y las conectamos con las poblaciones vulnerables de nuestro campo. El mapa amplía el alcance de AC2 con consumidores y trabajadores, además de los adultos mayores.
         </p>
         <div class="vuln-table">
           {negligences.map((n) => (
@@ -221,7 +232,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
                 <p class="vuln-row__note">{n.reasoning}</p>
               </div>
               <div>
-                <p class="vuln-row__head">Población afectada (AC2)</p>
+                <p class="vuln-row__head">Población afectada</p>
                 <p class="vuln-row__who">{n.population}</p>
                 <p class="vuln-row__why">{n.impact}</p>
               </div>
@@ -235,7 +246,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
         <figure class="figure-card">
           <Image
             src={negligencias}
-            alt="Infografía «Ingeniería de Sistemas: entre luces y sombras éticas»"
+            alt="Infografía «Ingeniería Empresarial y de Sistemas: entre luces y sombras éticas»"
             widths={[640, 978]}
             sizes="(min-width: 1200px) 860px, 92vw"
             loading="lazy"
@@ -251,6 +262,7 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
           <p class="callout__label">Cierre del Manifiesto</p>
           <p>{manifestoClosing}</p>
         </div>
+        <p>Las acciones positivas mantienen encendida la luz del faro: proteger los datos, transparentar procesos y auditar decisiones son formas concretas de excelencia ética.</p>
         <a class="refs-jump" href="#referencias-ac4">Referencias de AC4 ↓</a>
       </section>
 
@@ -267,4 +279,5 @@ const manifestoACs = roadmap.filter((m) => /^AC[1-4]$/.test(m.code));
       </section>
     </div>
   </div>
+<section class="info-section prose"><h2>Del compromiso a la acción</h2><p>Las fichas AC10 y AC11 profundizan el compromiso con adultos mayores en pobreza, usuarios de los servicios públicos de salud. Sus barreras de acceso digital y conectividad enlazan con las poblaciones del AC2 y con el conflicto ambiental de Espinar. <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/infografia/`}>Ver la infografía de integridad y sostenibilidad.</a></p></section>
 </BaseLayout>
