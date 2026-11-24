@@ -1,25 +1,130 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import References from '../components/References.astro';
-import { Image } from 'astro:assets';
-import foto from '../assets/images/infografia/ac10-cuidado.jpg';
 import { integridad as i } from '../lib/integridad';
 import { withBase } from '../lib/paths';
 const base = import.meta.env.BASE_URL;
+const imagen = withBase(base, 'media/infografia-integridad-sostenibilidad.webp');
+const autores = [
+  { nombre: 'Levinas', capa: '1', idea: 'El rostro del otro', texto: 'Reconocer a la persona antes que al expediente y escuchar sus necesidades.' },
+  { nombre: 'Gilligan', capa: '1', idea: 'Cuidado y justicia', texto: 'Complementar las reglas generales con la atención a la vulnerabilidad concreta.' },
+  { nombre: 'Noddings', capa: '1', idea: 'Cuidado auténtico', texto: 'Atender, responder y comprobar que la ayuda llega a quien la necesita.' },
+  { nombre: 'Jonas', capa: '2', idea: 'Responsabilidad futura', texto: 'Prevenir daños que comprometan las condiciones de vida de las futuras generaciones.' },
+  { nombre: 'Leff', capa: '2', idea: 'Justicia ambiental', texto: 'Reconocer que los daños ecológicos también pueden ser injusticias sociales.' },
+];
 ---
 <BaseLayout title="Infografía de integridad y sostenibilidad · Brújula Ética" crumbs={[{ label: 'Infografía' }]} description="Ética del cuidado y responsabilidad con las generaciones futuras: AC10 y AC11.">
 <header class="page-header"><p class="page-header__eyebrow">Módulo IV · AC10 + AC11 · EC3</p><h1 class="page-header__title">Integridad y <span class="serif-em">sostenibilidad</span></h1><p class="page-header__lead">Del rostro del otro al futuro que compartimos. El Faro de La Punta, nuestra metáfora de AC1, orienta el cuidado de las personas de hoy y la responsabilidad con las generaciones que heredarán nuestras decisiones.</p></header>
-<section class="integridad-pieza" aria-label="Infografía de dos capas">
-  <div class="integridad-head"><p>BRÚJULA ÉTICA · INGENIERÍA EMPRESARIAL Y DE SISTEMAS</p><h2>Un mismo rostro.<br/>Un futuro compartido.</h2><p>AC1 · El faro → AC10 · Cuidado → AC11 · Futuro</p></div>
-  <div class="integridad-grid">
-    <article class="integridad-capa"><p class="integridad-kicker">01 · AC10 · EL PRESENTE</p><h3>El rostro del otro</h3><figure><Image src={foto} alt="Persona adulta mayor esperando atención en un servicio de salud público" loading="lazy" /><figcaption>Fotografía incluida en la ficha AC10, p. 3; autor y procedencia original no consignados.</figcaption></figure><h4>La vulnerabilidad que reconocemos</h4><p>{i.careA}</p><h4>Compromiso de cuidado</h4><p>{i.careB}</p><div class="integridad-chips"><span>Levinas · Alteridad</span><span>Gilligan · Justicia y cuidado</span><span>Noddings · Atención y respuesta</span></div></article>
-    <article class="integridad-capa"><p class="integridad-kicker">02 · AC11 · EL FUTURO</p><h3>Responsabilidad con quienes vendrán</h3><figure><img src={withBase(base,'media/ac11-variante-1.svg')} alt="Ilustración conceptual de una persona mayor y una profesional con tableta en el altiplano de Espinar" loading="lazy" width="1000" height="600"/><figcaption>Ilustración vectorial provisional asistida por IA, basada en el prompt de AC11; no es una fotografía ni la selección original de Firefly.</figcaption></figure><h4>Espinar, Cusco · Justicia ambiental</h4><p>{i.ecoA}</p><h4>Compromiso intergeneracional</h4><p>{i.ecoB}</p><div class="integridad-chips"><span>Jonas · Responsabilidad</span><span>Leff · Ecoética</span></div></article>
+<ethical-infographic class="integridad-pieza" data-mode="all">
+  <div class="integridad-head">
+    <p>EC3 · AC10 + AC11</p>
+    <h2>El cuidado de hoy.<br/><span>El futuro de todos.</span></h2>
+    <p>Explora la infografía y descubre cómo nuestra carrera puede contribuir al bien común.</p>
   </div>
-  <div class="integridad-final"><strong>El puerto seguro: el bien común presente y futuro</strong><p>Escuchar · Diseñar con accesibilidad · Registrar sin ocultar · Prevenir daños · Rendir cuentas.</p></div>
-</section>
-<section class="info-section prose"><h2>Del propósito de AC1 al cuidado y la sostenibilidad</h2><p>La Ingeniería Empresarial y de Sistemas integra la gestión de organizaciones, procesos de negocio y soluciones tecnológicas. El telos de AC1 se concreta aquí al proteger a los adultos mayores en situación de pobreza; el areté, al diseñar sistemas transparentes y accesibles; y el florecimiento profesional, al contribuir al bienestar de la sociedad. Jonas y Leff amplían este compromiso hacia las generaciones futuras y la justicia ambiental.</p><h2>Del conflicto ambiental a la solución profesional</h2><p>{i.conflict}</p><p>Proponemos un registro de exposición ambiental y atención sanitaria con trazabilidad, canales presenciales y digitales de baja conectividad, lenguaje comprensible y protección de datos. El sistema debe permitir corregir errores y publicar indicadores agregados sin exponer información personal.</p><h2>Fundamento filosófico</h2><p>Levinas (2015) nos pide reconocer a la persona antes de reducirla a un expediente. Gilligan (2013) complementa la justicia con la atención a relaciones concretas. Noddings (2013) propone absorción en el otro, desplazamiento motivacional, reconocimiento y reciprocidad. Jonas (1995) amplía la responsabilidad a generaciones futuras; Leff (2002) vincula la justicia ecológica con la social.</p><h2>Decisiones visuales y uso de IA</h2><p>La ficha AC10 propone azul marino y dorado suave, tipografía Montserrat, imagen sobre texto y espacio para la segunda capa; el sitio adapta esa composición a sus tipografías existentes y a dispositivos móviles.</p><details><summary>Prompt exacto de la ficha AC11 y variantes de diseño</summary><blockquote>{i.prompt}</blockquote><p>La ficha propone Adobe Firefly (alternativas: Canva IA o DALL-E), al menos tres variantes y elegir la que preserve la dignidad. No se adjuntaron esas imágenes. Se incluyen tres alternativas vectoriales asistidas por IA; la primera se integra provisionalmente por su composición equilibrada y el protagonismo de las personas. La selección final corresponde al equipo.</p><div class="variantes">{[1,2,3].map(n=><figure><img src={withBase(base,`media/ac11-variante-${n}.svg`)} alt={`Alternativa vectorial ${n}`} width="1000" height="600" loading="lazy"/><figcaption>Variante {n}{n===1?' · integrada provisionalmente':''}</figcaption></figure>)}</div></details><h2>Recorrido final</h2><p>El faro del manifiesto define nuestro rumbo; el podcast confronta principios y consecuencias; el video-reacción cuestiona normas e intenciones; y la infografía une el cuidado del presente con la responsabilidad del futuro. Nuestro compromiso final es que el puerto seguro del bien común sea accesible para todos, también para quienes aún no han nacido.</p><p><a href={withBase(base,'bitacora/ec3-cierre')}>Preparación de la sustentación EC3 →</a></p></section>
+  <div class="integridad-tools" role="group" aria-label="Explorar la infografía" data-interactive hidden>
+    <button type="button" data-mode-select="all" aria-pressed="true">Vista completa</button>
+    <button type="button" data-mode-select="1" aria-pressed="false">01 · Compromiso de cuidado</button>
+    <button type="button" data-mode-select="2" aria-pressed="false">02 · Compromiso ambiental</button>
+  </div>
+  <figure class="integridad-figure">
+    <div class="integridad-image">
+      <img src={imagen} width="1536" height="1024" alt="Infografía de integridad y sostenibilidad: a la izquierda, el cuidado de adultos mayores en servicios públicos de salud; a la derecha, el conflicto ambiental de Espinar y la responsabilidad con generaciones futuras. El compromiso del equipo une ambas capas." decoding="async" />
+      <span class="integridad-highlight" aria-hidden="true"></span>
+    </div>
+    <figcaption class="integridad-caption">
+      <span>Infografía EC3 aportada por el equipo · AC10 y AC11</span>
+      <div class="integridad-actions">
+        <button type="button" data-open data-interactive hidden>Ampliar imagen ↗</button>
+        <a href={imagen} download="infografia-integridad-sostenibilidad.webp">Guardar imagen ↓</a>
+      </div>
+    </figcaption>
+  </figure>
+  <p class="integridad-status" aria-live="polite" data-status>Vista completa · Cuidado y ecoética</p>
+  <div class="integridad-grid">
+    <article class="integridad-capa" data-layer="1">
+      <p class="integridad-kicker">CAPA 1 · AC10 · SEMANA 13</p>
+      <h3>Compromiso de cuidado</h3>
+      <p>{i.careSummary}</p>
+      <p>{i.careFoundation}</p>
+      <div class="integridad-authors">{autores.filter(a=>a.capa==='1').map(a=><details><summary><strong>{a.nombre}</strong><span>{a.idea}</span></summary><p>{a.texto}</p></details>)}</div>
+    </article>
+    <article class="integridad-capa" data-layer="2">
+      <p class="integridad-kicker">CAPA 2 · AC11 · SEMANA 14</p>
+      <h3>Compromiso ambiental</h3>
+      <p>{i.ecoSummary}</p>
+      <p>{i.ecoFoundation}</p>
+      <div class="integridad-authors">{autores.filter(a=>a.capa==='2').map(a=><details><summary><strong>{a.nombre}</strong><span>{a.idea}</span></summary><p>{a.texto}</p></details>)}</div>
+    </article>
+  </div>
+  <div class="integridad-final"><strong>Nuestro compromiso · El puerto seguro</strong><p>Como equipo, asumimos una práctica profesional íntegra y sostenible: cuidar la salud y la dignidad de los adultos mayores hoy, y proteger el ambiente para garantizar su bienestar y el de las futuras generaciones.</p><p>Así como el faro guía a las embarcaciones hacia un puerto seguro, asumimos el compromiso de orientar la tecnología y la gestión empresarial hacia el bienestar humano y la sostenibilidad ambiental.</p><p>Nuestro <em>telos</em> es el bien común; nuestro <em>areté</em>, la excelencia profesional ejercida con integridad; y nuestra <em>eudaimonía</em>, la realización profesional al servicio de las personas y las generaciones futuras.</p></div>
+  <dialog class="integridad-dialog" aria-label="Visor ampliado de la infografía">
+    <div class="integridad-dialog-bar"><strong>Infografía · EC3</strong><div class="integridad-actions"><button type="button" data-zoom="-1" aria-label="Reducir zoom">−</button><output data-zoom-value aria-live="polite">100%</output><button type="button" data-zoom="1" aria-label="Aumentar zoom">+</button><button type="button" data-close aria-label="Cerrar visor" autofocus>Cerrar ×</button></div></div>
+    <div class="integridad-scroll" tabindex="0" aria-label="Imagen ampliada, desplaza para explorar"><img src={imagen} width="1536" height="1024" alt="Infografía completa de las dos capas, ampliable mediante los controles de zoom." loading="lazy" data-zoom-image /></div>
+  </dialog>
+</ethical-infographic>
+<section class="info-section prose"><h2>Del propósito de AC1 al cuidado y la sostenibilidad</h2><p>La Ingeniería Empresarial y de Sistemas integra la gestión de organizaciones, procesos de negocio y soluciones tecnológicas. El telos de AC1 se concreta aquí al proteger a los adultos mayores en situación de pobreza; el areté, al diseñar sistemas transparentes y accesibles; y el florecimiento profesional, al contribuir al bienestar de la sociedad. Jonas y Leff amplían este compromiso hacia las generaciones futuras y la justicia ambiental.</p><h2>Del conflicto ambiental a la solución profesional</h2><p>{i.conflict}</p><p>Proponemos un registro de exposición ambiental y atención sanitaria con trazabilidad, canales presenciales y digitales de baja conectividad, lenguaje comprensible y protección de datos. El sistema debe permitir corregir errores y publicar indicadores agregados sin exponer información personal.</p><h2>Fundamento filosófico</h2><p>Levinas (2015) nos pide reconocer a la persona antes de reducirla a un expediente. Gilligan (2013) complementa la justicia con la atención a relaciones concretas. Noddings (2013) propone absorción en el otro, desplazamiento motivacional, reconocimiento y reciprocidad. Jonas (1995) amplía la responsabilidad a generaciones futuras; Leff (2002) vincula la justicia ecológica con la social.</p><h2>Decisiones visuales y uso de IA</h2><p>La infografía entregada reúne las dos capas en una única composición: tonos rosados para el cuidado del presente y verdes para la ecoética, con el compromiso común al pie. El visor permite recorrer ambas capas y leer los fundamentos filosóficos sin modificar la imagen original.</p><details><summary>Consultar el prompt documentado en la ficha AC11</summary><blockquote>{i.prompt}</blockquote><p>La ficha propone Adobe Firefly, Canva IA o DALL-E y la comparación de tres variantes. Este prompt se conserva como antecedente del trabajo; no se ha confirmado que sea el prompt exacto de la imagen final aportada ni la herramienta utilizada para producirla.</p></details><h2>Recorrido final</h2><p>El faro del manifiesto define nuestro rumbo; el podcast confronta principios y consecuencias; el video-reacción cuestiona normas e intenciones; y la infografía une el cuidado del presente con la responsabilidad del futuro. Nuestro compromiso final es que el puerto seguro del bien común sea accesible para todos, también para quienes aún no han nacido.</p><p><a href={withBase(base,'bitacora/ec3-cierre')}>Preparación de la sustentación EC3 →</a></p></section>
 <References code="AC10"/><References code="AC11"/>
 </BaseLayout>
+<script>
+  class EthicalInfographic extends HTMLElement {
+    private zoom = 100;
+    private dialog: HTMLDialogElement | null = null;
+    private opener: HTMLElement | null = null;
+    private controller?: AbortController;
+    connectedCallback() {
+      if (this.controller) return;
+      this.controller = new AbortController();
+      const opts = { signal: this.controller.signal };
+      this.dialog = this.querySelector('dialog');
+      this.querySelectorAll<HTMLElement>('[data-interactive]').forEach(el => { el.hidden = false; });
+      this.addEventListener('click', this.handleClick, opts);
+      this.dialog?.addEventListener('close', () => { this.opener?.focus(); }, opts);
+    }
+    disconnectedCallback() {
+      this.controller?.abort();
+      this.controller = undefined;
+      if (this.dialog?.open) this.dialog.close();
+    }
+    private setMode(mode: string) {
+      this.dataset.mode = mode;
+      this.querySelectorAll<HTMLButtonElement>('[data-mode-select]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.modeSelect === mode)));
+      this.querySelectorAll<HTMLElement>('[data-layer]').forEach(el => { el.hidden = mode !== 'all' && el.dataset.layer !== mode; });
+      const status = this.querySelector('[data-status]');
+      if (status) status.textContent = mode === '1' ? 'Capa 1 · Compromiso de cuidado · Semana 13' : mode === '2' ? 'Capa 2 · Compromiso ambiental · Semana 14' : 'Vista completa · Cuidado y ecoética';
+    }
+    private setZoom(value: number) {
+      this.zoom = Math.max(100, Math.min(300, value));
+      const img = this.querySelector<HTMLElement>('[data-zoom-image]');
+      if (img) img.style.width = `${this.zoom}%`;
+      const output = this.querySelector('[data-zoom-value]');
+      if (output) output.textContent = `${this.zoom}%`;
+      this.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach(b => { b.disabled = b.dataset.zoom === '-1' ? this.zoom <= 100 : this.zoom >= 300; });
+    }
+    private handleClick = (event: MouseEvent) => {
+      if (event.target === this.dialog) { this.dialog?.close(); return; }
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest<HTMLButtonElement>('button');
+      if (!button || !this.contains(button)) return;
+      if (button.dataset.modeSelect) this.setMode(button.dataset.modeSelect);
+      if (button.hasAttribute('data-open')) {
+        if (!this.dialog || this.dialog.open) return;
+        this.opener = button;
+        this.setZoom(100);
+        this.dialog.showModal();
+      }
+      if (button.hasAttribute('data-close')) this.dialog?.close();
+      if (button.dataset.zoom) this.setZoom(this.zoom + 25 * Number(button.dataset.zoom));
+    };
+  }
+  if (!customElements.get('ethical-infographic')) customElements.define('ethical-infographic', EthicalInfographic);
+</script>
 <style>
-.integridad-pieza{margin:1.5rem 0 2.5rem;background:#f4f0e5;color:#152b3e;border-radius:20px;overflow:hidden;border:1px solid #c7a86b;box-shadow:0 12px 32px #0003}.integridad-head{background:#132c43;color:#f9efd5;padding:clamp(1.4rem,4vw,3rem);text-align:center}.integridad-head h2{font-size:clamp(2rem,5vw,3.7rem);line-height:1.05;margin:.6rem 0;color:#f5dca5;font-family:var(--font-display,serif)}.integridad-head p{font-size:.85rem;letter-spacing:.08em}.integridad-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#cbb584}.integridad-capa{padding:clamp(1rem,2.5vw,2rem);background:#f8f5ec}.integridad-kicker{color:#6d5323;font-weight:700;letter-spacing:.08em;font-size:.75rem}.integridad-capa h3{font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.2;margin:.5rem 0 1rem;color:#132c43}.integridad-capa h4{color:#6d5323;font-size:1rem;margin:1rem 0 .4rem}.integridad-capa figure{margin:0}.integridad-capa img{width:100%;aspect-ratio:5/3;object-fit:cover;border-radius:10px}.integridad-capa figcaption{font-size:.72rem;line-height:1.4;color:#4d5661;margin-top:.5rem}.integridad-capa p{line-height:1.55;font-size:.94rem}.integridad-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}.integridad-chips span{border:1px solid #bd9f62;border-radius:20px;padding:.3rem .65rem;font-size:.75rem;color:#5d4b28}.integridad-final{text-align:center;padding:1.4rem;background:#132c43;color:#f5e9c9}.integridad-final strong{font-size:1.25rem}.integridad-final p{margin:.5rem 0 0}.prose details{padding:1rem;border:1px solid var(--card-border-color);border-radius:12px}.prose summary{cursor:pointer;font-weight:600}.variantes{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.variantes figure{margin:0}.variantes img{border-radius:10px;width:100%;height:auto}.variantes figcaption{font-size:.8rem}@media(max-width:760px){.integridad-grid{grid-template-columns:1fr}}
+.integridad-pieza{display:block;margin:1.5rem 0 2.5rem;border:1px solid var(--border-color);border-radius:20px;overflow:hidden;background:var(--glass-bg);color:var(--text-color);box-shadow:0 12px 32px #0002}
+.integridad-head{background:#132c43;color:#f9efd5;padding:clamp(1.4rem,4vw,3rem);text-align:center}.integridad-head h2{font-family:var(--font-serif,serif);font-size:clamp(2.2rem,5vw,3.7rem);font-weight:400;line-height:1.05;margin:.6rem 0;color:#fff5e3}.integridad-head h2 span{color:#f0d59a}.integridad-head p{font-size:.9rem;margin:.35rem auto;max-width:58ch}
+.integridad-tools,.integridad-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}.integridad-tools{padding:1rem;justify-content:center}.integridad-pieza button,.integridad-actions a{font:inherit;font-size:.85rem;cursor:pointer;border:1px solid var(--border-color);background:var(--glass-bg);color:var(--heading-color);padding:.55rem .9rem;border-radius:10px;text-decoration:none}.integridad-tools button[aria-pressed=true]{background:#132c43;color:#fff5e3;border-color:#c9a24a}.integridad-pieza button:hover,.integridad-actions a:hover{border-color:var(--gold)}.integridad-pieza button:focus-visible,.integridad-actions a:focus-visible,.integridad-authors summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}.integridad-pieza button:disabled{opacity:.45;cursor:default}.integridad-pieza [hidden]{display:none!important}
+.integridad-figure{margin:0;padding:0 clamp(.5rem,2vw,1.4rem)}.integridad-image{position:relative;overflow:hidden;border-radius:12px;background:#f7f1df}.integridad-image img{display:block;width:100%;height:auto}.integridad-highlight{position:absolute;inset:0;pointer-events:none;border:0 solid transparent;border-radius:12px;transition:box-shadow .25s ease,border-color .25s ease}.integridad-pieza[data-mode="1"] .integridad-highlight{right:50%;border:3px solid #ad4059;box-shadow:0 0 0 100vmax #08102065}.integridad-pieza[data-mode="2"] .integridad-highlight{left:50%;border:3px solid #547c32;box-shadow:0 0 0 100vmax #08102065}.integridad-caption{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;padding:.75rem 0;color:var(--text-muted-color);font-size:.8rem}.integridad-status{font-size:.8rem;padding:.25rem 1.4rem .7rem;color:var(--text-muted-color)}
+.integridad-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding:0 clamp(.75rem,2vw,1.4rem) 1.4rem}.integridad-pieza:not([data-mode="all"]) .integridad-grid{grid-template-columns:1fr}.integridad-capa{padding:clamp(1rem,2.5vw,1.7rem);border:1px solid var(--border-color);border-top:3px solid #b85771;border-radius:14px;background:var(--glass-bg);min-width:0}.integridad-capa[data-layer="2"]{border-top-color:#729c50}.integridad-kicker{color:var(--gold);font-weight:700;letter-spacing:.08em;font-size:.75rem}.integridad-capa h3{font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.2;margin:.5rem 0 1rem;color:var(--heading-color)}.integridad-capa h4{color:var(--heading-color);font-size:1rem;margin:1rem 0 .4rem}.integridad-capa p{line-height:1.6;font-size:.94rem}.integridad-authors{display:grid;gap:.5rem;margin-top:1rem}.integridad-authors details{border:1px solid var(--border-color);border-radius:10px;padding:.65rem .85rem}.integridad-authors summary{cursor:pointer;color:var(--heading-color)}.integridad-authors summary span{display:block;margin-left:1rem;font-size:.8rem;color:var(--text-muted-color)}.integridad-authors details p{margin:.7rem 0 0}.integridad-final{text-align:center;padding:1.4rem;background:#132c43;color:#f5e9c9}.integridad-final strong{font-size:1.25rem}.integridad-final p{margin:.5rem auto 0;max-width:70ch;line-height:1.6}
+.integridad-dialog{padding:0;border:1px solid var(--border-color);border-radius:14px;width:min(96vw,1440px);max-width:none;max-height:94vh;background:var(--main-bg);color:var(--text-color);margin:auto;overflow:hidden}.integridad-dialog[open]{display:flex;flex-direction:column}.integridad-dialog::backdrop{background:#080b16d9}.integridad-dialog-bar{padding:.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}.integridad-scroll{overflow:auto;min-height:0;max-height:80vh;overscroll-behavior:contain}.integridad-scroll img{display:block;width:100%;max-width:none;height:auto}.prose details{padding:1rem;border:1px solid var(--border-color);border-radius:12px}.prose summary{cursor:pointer;font-weight:600}
+@media(max-width:760px){.integridad-grid{grid-template-columns:1fr}.integridad-caption{align-items:flex-start}.integridad-dialog-bar{gap:.4rem}.integridad-actions{gap:.3rem}.integridad-actions button{padding:.45rem .6rem}}
+@media(prefers-reduced-motion:reduce){.integridad-highlight{transition:none}} :global(html[data-effects="off"]) .integridad-highlight{transition:none}
 </style>
