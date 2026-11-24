@@ -2,14 +2,14 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
-const SITE = process.env.SITE || 'https://example.github.io';
+const SITE = process.env.SITE || 'https://jorge1330c.github.io';
 const BASE = process.env.BASE || '/';
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE,
   base: BASE,
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [mdx()]
 });
