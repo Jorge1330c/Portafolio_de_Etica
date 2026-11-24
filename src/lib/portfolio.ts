@@ -1,4 +1,4 @@
-import { team } from './team';
+import { team, CAREER } from './team';
 
 export const COURSE = {
   name: 'Ética y Deontología Profesional',
@@ -24,11 +24,11 @@ export interface Section {
 }
 
 export const sections: Section[] = [
-  { id: 'equipo', path: 'equipo', label: 'Equipo', title: 'Quiénes somos', eyebrow: 'Sinergia Sistémica · 5 integrantes', desc: 'Somos estudiantes de Ingeniería de Sistemas Empresarial. Descubre quiénes somos y qué nos motiva.', status: 'done', icon: 'users' },
+  { id: 'equipo', path: 'equipo', label: 'Equipo', title: 'Quiénes somos', eyebrow: 'Sinergia Sistémica · 4 integrantes', desc: `Somos estudiantes de ${CAREER}. Descubre quiénes somos y qué nos motiva.`, status: 'done', icon: 'users' },
   { id: 'manifiesto', path: 'manifiesto', label: 'Manifiesto', title: 'Manifiesto de Identidad Ética', eyebrow: 'Módulo I · Semanas 1–5', desc: 'El Faro de La Punta como metáfora, el propósito profesional, las poblaciones que protegemos, los valores y las fallas de nuestro campo.', status: 'done', icon: 'compass' },
-  { id: 'podcast', path: 'podcast', label: 'Podcast', title: 'Podcast de Dilema Moral', eyebrow: 'Módulo II · Semanas 6–7', desc: 'Un caso real del Perú desde dos marcos contrapuestos: el deber kantiano y el utilitarismo de Mill.', status: 'done', icon: 'mic' },
-  { id: 'videoreaccion', path: 'video-reaccion', label: 'Video-reacción', title: 'Video-reacción crítico', eyebrow: 'Módulo III · Semanas 9–12', desc: 'Revisamos nuestro propio podcast: vacíos normativos, tensiones ético-legales y una propuesta para humanizar el código.', status: 'done', icon: 'video' },
-  { id: 'infografia', path: 'infografia', label: 'Infografía', title: 'Infografía de Integridad y Sostenibilidad', eyebrow: 'Módulo IV · Semanas 13–15', desc: 'Nuestra pieza visual con dos capas: cuidado de poblaciones vulnerables y responsabilidad con generaciones futuras.', status: 'todo', icon: 'map' }
+  { id: 'podcast', path: 'podcast', label: 'Podcast', title: 'Podcast de Dilema Moral', eyebrow: 'Módulo II · Semanas 6–7', desc: 'El deber kantiano y el utilitarismo de Mill como criterios para orientar decisiones profesionales desde AC1.', status: 'done', icon: 'mic' },
+  { id: 'videoreaccion', path: 'video-reaccion', label: 'Video-reacción', title: 'Video-reacción crítico', eyebrow: 'Módulo III · Semanas 9–12', desc: 'Normas, códigos y responsabilidad: una guía de revisión del podcast vinculada a la excelencia ética de AC1.', status: 'done', icon: 'video' },
+  { id: 'infografia', path: 'infografia', label: 'Infografía', title: 'Infografía de Integridad y Sostenibilidad', eyebrow: 'Módulo IV · Semanas 13–15', desc: 'Del faro de AC1 al bien común: cuidado de poblaciones vulnerables y responsabilidad con generaciones futuras.', status: 'done', icon: 'map' }
 ];
 
 export interface Milestone {
@@ -45,12 +45,13 @@ export const roadmap: Milestone[] = [
   { code: 'AC2', title: 'Poblaciones vulnerables y compromiso ético', when: 'Semana 2', status: 'done', href: 'bitacora/ac2-poblaciones-vulnerables', note: 'Manifiesto' },
   { code: 'AC3', title: 'Jerarquía de valores y tensión axiológica', when: 'Semana 3', status: 'done', href: 'bitacora/ac3-jerarquia-de-valores', note: 'Manifiesto' },
   { code: 'AC4', title: 'Mapa de negligencias y acciones positivas', when: 'Semana 4', status: 'done', href: 'bitacora/ac4-mapa-de-negligencias', note: 'Manifiesto' },
-  { code: 'EC1', title: 'Presentación del Manifiesto de Identidad Ética completo', when: 'Semana 5', status: 'done', href: 'manifiesto', note: '18 % de la nota' },
+  { code: 'EC1', title: 'Presentación del Manifiesto de Identidad Ética completo', when: 'Semana 5', status: 'done', href: 'bitacora/ec1-manifiesto', note: '18 % de la nota' },
   { code: 'AC5–AC6', title: 'Guion del podcast (dilema ético profesional)', when: 'Semanas 6–7', status: 'done', href: 'podcast' },
+  { code: 'EP', title: 'Evaluación parcial individual', when: 'Semana 8', status: 'done', href: 'bitacora/ep-evaluacion-parcial', note: 'Material de evaluación' },
   { code: 'AC7–AC9', title: 'Video-reacción al podcast', when: 'Semanas 9–11', status: 'done', href: 'video-reaccion' },
-  { code: 'EC2', title: 'Sustentación del portafolio', when: 'Semana 12', status: 'todo' },
-  { code: 'AC10–AC11', title: 'Infografía de integridad y sostenibilidad', when: 'Semanas 13–14', status: 'todo', href: 'infografia' },
-  { code: 'EC3', title: 'Sustentación final del portafolio', when: 'Semana 15', status: 'todo' }
+  { code: 'EC2', title: 'Video-reacción y sustentación', when: 'Semana 12', status: 'done', href: 'bitacora/ec2-video-reaccion', note: '18 %' },
+  { code: 'AC10–AC11', title: 'Infografía de integridad y sostenibilidad', when: 'Semanas 13–14', status: 'done', href: 'infografia', note: 'Texto integrado · imagen propuesta' },
+  { code: 'EC3', title: 'Preparación de la sustentación final del portafolio', when: 'Semana 15', status: 'wip', href: 'bitacora/ec3-cierre', note: '19 % · preparación' }
 ];
 
 export const STATUS_LABEL: Record<Status, string> = { done: 'Listo', wip: 'En construcción', todo: 'Próximamente' };

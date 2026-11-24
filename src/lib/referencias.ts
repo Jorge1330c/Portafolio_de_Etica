@@ -47,4 +47,163 @@ export const references: Record<string, Reference[]> = {
   ]
 };
 
+Object.assign(references, {
+  "EC1": [...references.AC1, ...references.AC2, ...references.AC3, ...references.AC4],
+  "AC5": [
+    {
+      "lead": "Kant, I. (1785/2012).",
+      "title": "Fundamentación de la metafísica de las costumbres",
+      "rest": " (R. R. Aramayo, trad.). Alianza."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 6: Deber moral y autonomía de la voluntad",
+      "rest": " [Material del curso HUM-010]."
+    }
+  ],
+  "AC6": [
+    {
+      "lead": "Bentham, J. (1789/2017).",
+      "title": "An introduction to the principles of morals and legislation",
+      "rest": " (J. Bennett, ed.). Early Modern Texts."
+    },
+    {
+      "lead": "Mill, J. S. (1863/2014).",
+      "title": "El utilitarismo",
+      "rest": " (E. Guisán, trad.). Alianza."
+    },
+    {
+      "lead": "Kant, I. (1785/2012).",
+      "title": "Fundamentación de la metafísica de las costumbres",
+      "rest": ". Alianza."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 7: Utilitarismo y bien común",
+      "rest": " [Material del curso HUM-010]."
+    }
+  ],
+  "AC7": [
+    {
+      "lead": "Hobbes, T. (1651/2018).",
+      "title": "Leviatán",
+      "rest": ". Deusto."
+    },
+    {
+      "lead": "Locke, J. (1690/2006).",
+      "title": "Segundo Tratado sobre el Gobierno Civil",
+      "rest": ". Alianza Editorial."
+    },
+    {
+      "lead": "Rousseau, J. J. (1762/1999).",
+      "title": "El contrato social",
+      "rest": ". Universidad ARCIS."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 9: Contrato social y normas profesionales",
+      "rest": " [Material del curso HUM-010]."
+    }
+  ],
+  "AC8": [
+    {
+      "lead": "Polo, S. (2003).",
+      "title": "Ética profesional",
+      "rest": ". Gestión en el Tercer Milenio, 6(12), 69–78."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 10: Análisis de los códigos deontológicos",
+      "rest": " [Material del curso HUM-010; portada indica ciclo 2026-1]."
+    }
+  ],
+  "AC9": [
+    {
+      "lead": "Weber, M. (1919).",
+      "title": "La política como vocación",
+      "rest": ". Edición electrónica."
+    },
+    {
+      "lead": "Jonas, H. (1995).",
+      "title": "El principio de responsabilidad",
+      "rest": ". Herder."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 11: Convicción, consecuencias y omisión",
+      "rest": " [Material del curso HUM-010]."
+    }
+  ],
+  "AC10": [
+    {
+      "lead": "Levinas, E. (2015).",
+      "title": "Ética e infinito",
+      "rest": " (F. Stein, trad.). Visor."
+    },
+    {
+      "lead": "Gilligan, C. (2013).",
+      "title": "La ética del cuidado",
+      "rest": ". Cuadernos de la Fundación Víctor Grífols i Lucas."
+    },
+    {
+      "lead": "Noddings, N. (2013).",
+      "title": "Caring: A relational approach to ethics and moral education",
+      "rest": " (2.ª ed.). University of California Press."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 13: Ética del cuidado en el ejercicio profesional",
+      "rest": " [Material del curso HUM-010]."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Ficha de aprendizaje colaborativo AC10",
+      "rest": " [Ficha completada por el equipo]."
+    }
+  ],
+  "AC11": [
+    {
+      "lead": "Jonas, H. (1995).",
+      "title": "El principio de responsabilidad: Ensayo de una ética para la civilización tecnológica",
+      "rest": ". Herder."
+    },
+    {
+      "lead": "Leff, E. (2002).",
+      "title": "Manifiesto por la vida: Por una ética para la sustentabilidad",
+      "rest": ". Simposio sobre Ética y Desarrollo Sustentable."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 14: Ecoética y responsabilidad generacional",
+      "rest": " [Material del curso HUM-010]."
+    },
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Ficha de aprendizaje colaborativo AC11",
+      "rest": " [Ficha completada por el equipo]."
+    }
+  ],
+  "EP": [
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 8: Evaluación individual",
+      "rest": " [Material del curso HUM-010]."
+    }
+  ],
+  "EC2": [
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 12: Sustentación del análisis profesional",
+      "rest": " [Material del curso HUM-010]."
+    }
+  ],
+  "EC3": [
+    {
+      "lead": "Universidad Científica del Sur. (2026).",
+      "title": "Sesión 15: Sustentación del portafolio digital",
+      "rest": " [Material del curso HUM-010]."
+    }
+  ]
+});
+
 export function referencesFor(code: string): Reference[] { return references[code] ?? []; }
